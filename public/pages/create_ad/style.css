@@ -1,0 +1,133 @@
+body {
+    margin: 0;
+}
+
+.container {
+    margin: 0px 200px;
+}
+
+.header {
+    background-image: url(/public/content/img/background.jpg);
+    height: 17vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-line {
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttons {
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item {
+    color: rgb(58, 67, 75);
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin-right: 25px;
+
+    transition: color 0.3s linear;
+}
+
+.nav-item:hover {
+    color: rgb(125, 179, 212);
+}
+
+.btns {
+    display: flex;
+}
+
+.cart {
+    position: relative;
+    border-left: 2px solid rgb(58, 67, 75);
+    padding-left: 20px;
+    height: 80px;
+}
+
+.create_form {
+    background-color: rgba(198, 198, 198, 0.226);
+    margin: 50px 350px;
+    width: 800px;
+    border-radius: 20px;
+}
+
+.form{
+    padding: 50px;
+}
+
+.title {
+    font-family: 'Tinos', serif;
+    color: rgb(36, 48, 60);
+    font-size: 20px;
+}
+
+#form, #form-type, #name, #desc, #price, #count_mem, #time_end, #img, #tag{
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.form-desc {
+    height: 100px;
+    width: 400px;
+    border: 2px solid rgb(60, 143, 226);
+    max-width: 400px;
+}
+
+.form-name {
+    height: 20px;
+    border: 2px solid rgb(60, 143, 226);
+}
+
+.form-img {
+    height: 200px;
+}
+
+input[type="number"]{
+    width: 100px;
+}
+
+.button {
+    background-color: rgb(60, 143, 226);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 18px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 30px;
+    
+    transition: background-color 0.2s linear;
+}
+
+.button:hover {
+    background-color: rgb(34, 76, 118);
+}
+
+select {
+    width: 150px;
+    min-height: 25px;
+    border: 2px solid rgb(60, 143, 226);
+}
+
+#success_info{
+    width: auto;
+    height: 30px;
+    background-color: rgba(226, 190, 60, 0.6);
+    padding: 10px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.img-choice {
+    padding-left: 70px;
+}

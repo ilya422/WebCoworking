@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание объявления</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tinos&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class='header'>
+        <div class="'container">
+            <div class="header-line">
+                <div class="header-logo">
+                    <a href="/">
+                        <img src="/public/content/img/utmn.png" alt="">
+                    </a>
+                </div>
+                <div class='buttons'>
+                    <div class="btns">
+                        <div class="nav">
+                            <a class="nav-item" href="@">ВЫБРАННЫЕ МЕРОПРИЯТИЯ</a>
+                            <a class="nav-item" href="@">ВАШИ ОБЪЯВЛЕНИЯ</a>
+                        </div>
+                    </div>
+                    <div class="cart">
+                        <a href="/profile/1">
+                            <img class="cart-img" src="/public/content/img/profile.png" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="create_form">
+        <div class="form">
+            <div class="type">
+                <a class="title"><b>Тип объявления:</b></a><br>
+                <select class="form-name" id="form-type" onChange="selected_type(this)">
+                    <option value="0"></option>
+                </select><br>
+                <div id="view_form">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="index.js"></script>
+
+</html>
