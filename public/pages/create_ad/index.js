@@ -91,8 +91,8 @@ async function create_evAdv() {
     let description = document.getElementById('desc').value
     let count_member = document.getElementById('count_mem').value
     let time_end = document.getElementById('time_end').value
-    // let img = document.getElementById('img').src
-    let img = '/public/content/img/mero.png'
+    let img = document.getElementById('img').src
+    // let img = '/public/content/img/mero.png'
     let type = document.getElementById('form-type').selectedIndex
     let tag = document.getElementById('tag').selectedIndex
 
@@ -134,7 +134,35 @@ async function create_evAdv() {
 }
 
 
+function showIMG(input) {
+    var file = input.files[0];
 
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onload = function () {
+        var imageUrlFull = reader.result;
+
+        var imageLocalFull = new Image();
+        imageLocalFull.src = imageUrlFull;
+
+        imageLocalFull.onload = function () {
+            var canvas = document.createElement('canvas');
+            canvas.width = 256; canvas.height = 256;
+            var context = canvas.getContext('2d');
+            context.drawImage(imageLocalFull, 0, 0, 256, 256);
+            var imageUrlIcon = canvas.toDataURL(file.type);
+
+            var imageLocalIcon = new Image();
+            imageLocalIcon.src = imageUrlIcon;
+
+            imageLocalIcon.onload = function () {
+                let lable = document.getElementById('form-img')
+                lable.src = imageLocalIcon.src
+            };
+        }
+    }
+}
 
 
 function viewEventFrom() {
@@ -160,8 +188,8 @@ function viewEventFrom() {
                 </div>     
 
                 <div class="img-choice">
-                    <img class="form-img" src="http://cdn.onlinewebfonts.com/svg/img_103323.png">
-                    <input id="img" type="file">
+                    <img id="form-img" src="http://cdn.onlinewebfonts.com/svg/img_103323.png">
+                    <input type="file" id="img_inp" accept="image/*" onchange="showIMG(this)">
                 </div>
             </div>
     `
@@ -189,8 +217,8 @@ function viewServiceFrom() {
             </div>     
 
             <div class="img-choice">
-                <img class="form-img" src="http://cdn.onlinewebfonts.com/svg/img_103323.png">
-                <input id="img" type="file">
+                <img id="form-img" src="http://cdn.onlinewebfonts.com/svg/img_103323.png">
+                <input type="file" id="img_inp" accept="image/*" onchange="showIMG(this)">
             </div>
     `;
     getTags();
