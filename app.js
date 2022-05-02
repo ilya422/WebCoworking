@@ -15,6 +15,20 @@ app.use(service_advRouter)
 app.use(typeRouter)
 app.use(tagRouter)
 
-app.listen(8080, 'localhost', () => {
-    console.log('Server running at http://127.0.0.1:8080/');
+var port = normalizePort(process.env.PORT || '3000');
+var server = app.listen(port, () => {
+    var addr = server.address();
+    var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+    console.log('Listening on ' + bind);
 })
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+    if (isNaN(port)) {
+        return val;
+    }
+    if (port >= 0) {
+        return port;
+    }
+    return false;
+}
