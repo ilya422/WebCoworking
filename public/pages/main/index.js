@@ -14,7 +14,7 @@ async function getTypes() {
             div.innerHTML += `<option value="${v.id}">${v.name}</option>`;
         }
     } else {
-        alert('error', response.status);
+        console.log('error', response.status);
     }
 }
 

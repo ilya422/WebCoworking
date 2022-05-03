@@ -17,9 +17,8 @@ app.use(tagRouter)
 
 var port = normalizePort(process.env.PORT || '3000');
 var server = app.listen(port, () => {
-    var addr = server.address();
-    var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
-    console.log('Listening on ' + bind);
+    var port = server.address().port;
+    console.log('Listening on http://127.0.0.1:' + port);
 })
 
 function normalizePort(val) {
