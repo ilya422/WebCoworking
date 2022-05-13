@@ -10,26 +10,27 @@ class UserController {
         )
         res.json('ok')
     }
-    async getUserEmail(req, res) {
+    async getUsers(req, res) {
+        const id = req.params.id
         const sql = await db.query(
-            `SELECT id, email
+            `SELECT id, first_name, last_name, email, moder, img
             FROM public.users`
         )
         res.json(sql.rows)
     }
-    async getOneUser(req, res) {
+    async getOneUserByID(req, res) {
         const id = req.params.id
         const sql = await db.query(
-            `SELECT id, first_name, last_name, email, img, moder
+            `SELECT id, first_name, last_name, email, moder, img, password
             FROM public.users
             WHERE id = $1`, [id]
         )
         res.json(sql.rows)
     }
-    async getUserForLogin(req, res) {
+    async getOneUserByEmail(req, res) {
         const email = req.params.email
         const sql = await db.query(
-            `SELECT email, password
+            `SELECT id, first_name, last_name, email, moder, img, password
             FROM public.users
             WHERE email = $1`, [email]
         )
@@ -51,6 +52,26 @@ class UserController {
             WHERE id = $1`, [id]
         )
         res.json('ok')
+    }
+
+    async findOneUserByEmail(req) {
+        const email = req.email
+        const sql = await db.query(
+            `SELECT id, first_name, last_name, email, moder, img, password
+            FROM public.users
+            WHERE email = $1`, [email]
+        )
+        return sql.rows
+    }
+
+    async createUserFromReg(req) {
+        const {first_name, last_name, email, hashPassword} = req
+        const sql = await db.query(
+            `INSERT INTO public.users(
+            first_name, last_name, email, password)
+            VALUES ($1, $2, $3, $4)`, [first_name, last_name, email, hashPassword]
+        )
+        return
     }
 }
 module.exports = new UserController()

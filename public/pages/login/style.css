@@ -41,6 +41,7 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
 }
 
 input[type='text'] 
@@ -52,6 +53,23 @@ input[type='text']
 .question{
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
+}
+
+.btns-problem{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-wrap:wrap;
+  }
+
+#no-registred{
+    position: absolute;
+    left: 14%;
+}
+
+#forget-password{
+    position: absolute;
+    right: 20%;
 }
 
 .button-problem{
@@ -102,5 +120,17 @@ input[type='text']
     }
     .login-form{
         width: 60%;
+    }
+    .btns-problem{
+        flex-direction: column;
+    }
+    #no-registred{
+        position: static;
+        left: auto;
+    }
+
+    #forget-password{
+        position: static;
+        right: auto;
     }
 }

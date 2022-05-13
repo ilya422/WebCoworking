@@ -6,6 +6,7 @@ const event_advRouter = require('./routes/event_adv.router')
 const service_advRouter = require('./routes/service_adv.router')
 const typeRouter = require('./routes/type.router')
 const tagRouter = require('./routes/tag.router')
+const authRouter = require('./routes/auth.router')
 
 app.use(express.json())
 app.use(pagesRouter)
@@ -14,6 +15,7 @@ app.use(event_advRouter)
 app.use(service_advRouter)
 app.use(typeRouter)
 app.use(tagRouter)
+app.use(authRouter)
 
 var port = normalizePort(process.env.PORT || '8080');
 var server = app.listen(port, () => {

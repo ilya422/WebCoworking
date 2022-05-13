@@ -5,7 +5,7 @@ function load_page() {
 
 
 async function getUser() {
-    response = await fetch('/api/user/1');
+    response = await fetch('/api/user/id/1');
 
     if (response.ok) {
         json_data = await response.json();

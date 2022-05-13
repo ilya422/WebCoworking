@@ -1,6 +1,7 @@
 const Router = require('express')
 const router = new Router()
 const path = require('path');
+const authMiddleware = require('../middleware/auth.middleware')
 
 router.use('/',
     Router.static(path.resolve('public/pages/main')))
@@ -8,6 +9,8 @@ router.use('/',
 router.use('/create_ad',
     Router.static(path.resolve('public/pages/create_ad')))
 
+// router.use('/profile/:id', authMiddleware,
+//     Router.static(path.resolve('public/pages/profile')))
 router.use('/profile/:id',
     Router.static(path.resolve('public/pages/profile')))
 
