@@ -9,6 +9,7 @@ class evAdvController {
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`, 
             [name, description, count_member, time_end, img, id_type, id_tag, id_user_add]
         )
+        res.json('ok')
     }
     async get_evAdvs(req, res) {
         const sql = await db.query(
@@ -42,6 +43,7 @@ class evAdvController {
             id_type=$7, id_tag=$8, id_user_add=$9, time_add=$10
             WHERE id = $11`, [name, description, count_member, current_member, time_end, img, id_type, id_tag, id_user_add, time_add, id]
         )
+        res.json('ok')
     }
     async delete_evAdv(req, res) {
         const id = req.params.id
@@ -49,6 +51,7 @@ class evAdvController {
             `DELETE FROM public.event_advs
             WHERE id = $1`, [id]
         )
+        res.json('ok')
     }
 }
 module.exports = new evAdvController()

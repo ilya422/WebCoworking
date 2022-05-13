@@ -15,7 +15,7 @@ app.use(service_advRouter)
 app.use(typeRouter)
 app.use(tagRouter)
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8080');
 var server = app.listen(port, () => {
     var port = server.address().port;
     console.log('Listening on http://127.0.0.1:' + port);

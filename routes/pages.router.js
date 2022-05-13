@@ -14,6 +14,12 @@ router.use('/profile/:id',
 router.use('/edit_profile/:id',
     Router.static(path.resolve('public/pages/edit_profile')))
 
+router.use('/login',
+    Router.static(path.resolve('public/pages/login')))
+
+router.use('/registration',
+    Router.static(path.resolve('public/pages/registration')))
+
 router.route('/public/content/img/*')
     .get((req, res) => {
         res.sendFile(req.url, { root: path.dirname(__dirname) });

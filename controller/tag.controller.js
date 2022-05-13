@@ -8,6 +8,7 @@ class TagController {
             name)
             VALUES ($1)`, [name]
         )
+        res.json('ok')
     }
     async getTags(req, res) {
         const sql = await db.query(
@@ -32,6 +33,7 @@ class TagController {
             SET name=$1
             WHERE id = $2`, [name, id]
         )
+        res.json('ok')
     }
     async deleteTag(req, res) {
         const id = req.params.id
@@ -39,6 +41,7 @@ class TagController {
             `DELETE FROM public.tags
             WHERE id = $1`, [id]
         )
+        res.json('ok')
     }
 }
 module.exports = new TagController()

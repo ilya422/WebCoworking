@@ -9,6 +9,7 @@ class serAdvController {
             VALUES ($1, $2, $3, $4, $5, $6, $7)`,
             [name, description, price, img, id_type, id_tag, id_user_add]
         )
+        res.json('ok')
     }
     async get_serAdvs(req, res) {
         const sql = await db.query(
@@ -42,6 +43,7 @@ class serAdvController {
             id_type=$5, id_tag=$6, id_user_add=$7, time_add=$8
             WHERE id = $9`, [name, description, price, img, id_type, id_tag, id_user_add, id]
         )
+        res.json('ok')
     }
     async delete_serAdv(req, res) {
         const id = req.params.id
@@ -49,6 +51,7 @@ class serAdvController {
             `DELETE FROM public.service_advs
             WHERE id = $1`, [id]
         )
+        res.json('ok')
     }
 }
 module.exports = new serAdvController()

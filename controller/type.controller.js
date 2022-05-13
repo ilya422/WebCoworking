@@ -8,6 +8,7 @@ class TypeController {
             name)
             VALUES ($1)`, [name]
         )
+        res.json('ok')
     }
     async getTypes(req, res) {
         const sql = await db.query(
@@ -32,6 +33,7 @@ class TypeController {
             SET name=$1
             WHERE id = $2`, [name, id]
         )
+        res.json('ok')
     }
     async deleteType(req, res) {
         const id = req.params.id
@@ -39,6 +41,7 @@ class TypeController {
             `DELETE FROM public.types
             WHERE id = $1`, [id]
         )
+        res.json('ok')
     }
 }
 module.exports = new TypeController()

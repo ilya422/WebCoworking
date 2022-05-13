@@ -188,7 +188,7 @@ function viewEventFrom() {
                 </div>     
 
                 <div class="img-choice">
-                    <img id="form-img" src="http://cdn.onlinewebfonts.com/svg/img_103323.png">
+                    <img id="form-img" src="/public/content/img/image_add.png">
                     <input type="file" id="img_inp" accept="image/*" onchange="showIMG(this)">
                 </div>
             </div>
@@ -217,7 +217,7 @@ function viewServiceFrom() {
             </div>     
 
             <div class="img-choice">
-                <img id="form-img" src="http://cdn.onlinewebfonts.com/svg/img_103323.png">
+                <img id="form-img" src="/public/content/img/image_add.png">
                 <input type="file" id="img_inp" accept="image/*" onchange="showIMG(this)">
             </div>
     `;
