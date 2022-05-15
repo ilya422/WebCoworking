@@ -1,5 +1,7 @@
 const express = require('express');
+const cookieParser = require("cookie-parser");
 const app = express();
+
 const pagesRouter = require('./routes/pages.router')
 const userRouter = require('./routes/user.router')
 const event_advRouter = require('./routes/event_adv.router')
@@ -9,6 +11,8 @@ const tagRouter = require('./routes/tag.router')
 const authRouter = require('./routes/auth.router')
 
 app.use(express.json())
+app.use(cookieParser());
+
 app.use(pagesRouter)
 app.use(userRouter)
 app.use(event_advRouter)

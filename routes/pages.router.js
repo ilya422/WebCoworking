@@ -9,10 +9,10 @@ router.use('/',
 router.use('/create_ad',
     Router.static(path.resolve('public/pages/create_ad')))
 
-// router.use('/profile/:id', authMiddleware,
-//     Router.static(path.resolve('public/pages/profile')))
-router.use('/profile/:id',
+router.use('/profile/:id', authMiddleware,
     Router.static(path.resolve('public/pages/profile')))
+// router.use('/profile/:id',
+//     Router.static(path.resolve('public/pages/profile')))
 
 router.use('/edit_profile/:id',
     Router.static(path.resolve('public/pages/edit_profile')))
