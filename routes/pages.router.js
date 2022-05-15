@@ -6,15 +6,13 @@ const authMiddleware = require('../middleware/auth.middleware')
 router.use('/',
     Router.static(path.resolve('public/pages/main')))
 
-router.use('/create_ad',
+router.use('/create_ad', authMiddleware,
     Router.static(path.resolve('public/pages/create_ad')))
 
-router.use('/profile/:id', authMiddleware,
+router.use('/profile', authMiddleware,
     Router.static(path.resolve('public/pages/profile')))
-// router.use('/profile/:id',
-//     Router.static(path.resolve('public/pages/profile')))
 
-router.use('/edit_profile/:id',
+router.use('/edit_profile', authMiddleware,
     Router.static(path.resolve('public/pages/edit_profile')))
 
 router.use('/login',

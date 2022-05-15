@@ -36,9 +36,10 @@ async function registration() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(body_json)
-        });
-        await response.json();
-        console.log("Пользователь создан")
+        }).then(
+            setTimeout(function () {
+                window.location.href = '/login';
+            }, 1000));
     }
     catch(err) {
         console.log(err)

@@ -77,7 +77,7 @@ body {
     margin-right: 30px;
 }
 
-.ed-btn {
+.profile_btn {
     padding-top: 20px;
 }
 
@@ -94,7 +94,6 @@ body {
 }
 
 .button {
-    background-color: rgb(60, 143, 226);
     color: #fff;
     text-decoration: none;
     padding: 14px 18px;
@@ -105,8 +104,19 @@ body {
     transition: background-color 0.2s linear;
 }
 
-.button:hover{
+#bttn_exit{
+    background-color: rgb(190, 41, 41);
+}
+
+#bttn_edit, #bttn_create_ad{
+    background-color: rgb(60, 143, 226);
+}
+
+#bttn_edit:hover{
     background-color: rgb(34, 76, 118);
 }
 
+#bttn_exit:hover{
+    background-color: rgb(118, 34, 34);
+}
 

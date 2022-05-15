@@ -2,7 +2,8 @@ const db = require('../database/db')
 
 class evAdvController {
     async create_evAdv(req, res) {
-        const {name, description, count_member, time_end, img, id_type, id_tag, id_user_add} = req.body
+        const {name, description, count_member, time_end, img, id_type, id_tag} = req.body
+        const id_user_add = req.user.id
         const sql = await db.query(
             `INSERT INTO public.event_advs(
             name, description, count_member, time_end, img, id_type, id_tag, id_user_add)
@@ -36,7 +37,8 @@ class evAdvController {
         res.json(sql.rows[0])
     }
     async update_evAdv(req, res) {
-        const {id, name, description, count_member, current_member, time_end, img, id_type, id_tag, id_user_add, time_add} = req.body
+        const {id, name, description, count_member, current_member, time_end, img, id_type, id_tag, time_add} = req.body
+        const id_user_add = req.user.id
         const sql = await db.query(
             `UPDATE public.event_advs
             name=$1, description=$2, count_member=$3, current_member=$4, time_end=$5, img=$6,

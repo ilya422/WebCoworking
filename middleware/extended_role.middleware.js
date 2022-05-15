@@ -7,13 +7,12 @@ module.exports = function (req, res, next) {
     }
 
     try {
-        const token = req.cookies.access_token;
-        if (!token) {
-            return res.redirect('/login');
+        if (req.user.role == "Расширенный" || req.user.role == "Администратор") {
+            next()
         }
-        const decodedData = jwt.verify(token, secret)
-        req.user = decodedData
-        next()
+        else {
+            return res.json({message: "Недостаточная роль"})
+        }
     } catch (e) {
         return res.json({e});
     }

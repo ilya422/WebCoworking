@@ -1,7 +1,21 @@
 window.onload = load_page()
 function load_page() {
+    getProfileImage();
     getTypes();
     getAllAdv();
+}
+
+async function getProfileImage() {
+    let response = await fetch('/api/user/id')
+    if (response.ok) {
+        img = document.getElementById('profile_img');
+        json_data = await response.json();
+        console.log(json_data)
+        img.src = json_data[0].img;
+
+    } else {
+        console.log('error', response.status);
+    }
 }
 
 async function getTypes() {
@@ -31,7 +45,7 @@ async function getAllAdv() {
         json_data = [...json_data_ev, ...json_data_ser];
         json_data.sort(function (a, b) {
             var dateA = new Date(a.time_add), dateB = new Date(b.time_add)
-            return dateB - dateA 
+            return dateB - dateA
         });
 
         for (var i in json_data) {
@@ -58,7 +72,7 @@ async function getEventAdv() {
         json_data = await response_ev.json();
         json_data.sort(function (a, b) {
             var dateA = new Date(a.time_add), dateB = new Date(b.time_add)
-            return dateB - dateA 
+            return dateB - dateA
         });
         for (var i in json_data) {
             var v = json_data[i];
@@ -79,7 +93,7 @@ async function getServiceAdv() {
         json_data = await response_ser.json();
         json_data.sort(function (a, b) {
             var dateA = new Date(a.time_add), dateB = new Date(b.time_add)
-            return dateB - dateA 
+            return dateB - dateA
         });
         for (var i in json_data) {
             var v = json_data[i];
@@ -103,7 +117,7 @@ function selected_type(a) {
 }
 
 
-function card_servise(v){
+function card_servise(v) {
     return `
     <div class="card-service">
         <a href="#">
@@ -125,7 +139,7 @@ function card_servise(v){
 }
 
 
-function card_event(v){
+function card_event(v) {
     return `
     <div class="card-event">
         <a href="#">

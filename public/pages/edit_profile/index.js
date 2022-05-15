@@ -4,7 +4,7 @@ function load_page() {
 }
 
 async function getUser() {
-    response = await fetch('/api/user/1');
+    response = await fetch('/api/user/id');
 
     if (response.ok) {
         json_data = await response.json();
@@ -13,11 +13,7 @@ async function getUser() {
         document.getElementById('first_name').value = json_data.first_name
         document.getElementById('last_name').value = json_data.last_name
         document.getElementById('email').value = json_data.email
-        if (json_data.status) {
-            document.getElementById('status').innerHTML = "Разрешено"
-        } else {
-            document.getElementById('status').innerHTML = "Запрещено"
-        }
+        document.getElementById('role').innerHTML = json_data.role
         document.getElementById('img').src = json_data.img
 
     } else {
@@ -30,7 +26,6 @@ async function update_User() {
     let last_name = document.getElementById('last_name').value
     let email = document.getElementById('email').value
     let img = document.getElementById('img').src
-    // let img = '/public/content/img/profile.png'
 
     let success_info = document.getElementById("success_info")
     if (first_name == '' || last_name == '' || email == '' || img == '') {
@@ -40,7 +35,6 @@ async function update_User() {
     }
 
     let body_json = {
-        "id": 1,
         "first_name": first_name,
         "last_name": last_name,
         "email": email,
@@ -50,7 +44,7 @@ async function update_User() {
     try {
         success_info.innerHTML = `Данные сохранены!`
         success_info.style.display = 'flex'
-        let response = await fetch('/api/user/1', {
+        let response = await fetch('/api/user', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

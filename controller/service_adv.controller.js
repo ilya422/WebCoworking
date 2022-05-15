@@ -2,7 +2,8 @@ const db = require('../database/db')
 
 class serAdvController {
     async create_serAdv(req, res) {
-        const { name, description, price, img, id_type, id_tag, id_user_add } = req.body
+        const { name, description, price, img, id_type, id_tag } = req.body
+        const id_user_add = req.user.id
         const sql = await db.query(
             `INSERT INTO public.service_advs(
             name, description, price, img, id_type, id_tag, id_user_add)
@@ -36,7 +37,8 @@ class serAdvController {
         res.json(sql.rows[0])
     }
     async update_serAdv(req, res) {
-        const { id, name, description, price, img, id_type, id_tag, id_user_add } = req.body
+        const { id, name, description, price, img, id_type, id_tag } = req.body
+        const id_user_add = req.user.id
         const sql = await db.query(
             `UPDATE public.service_advs
             name=$1, description=$2, price=$3, img=$4,

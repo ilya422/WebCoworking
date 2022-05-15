@@ -23,7 +23,7 @@
                 </div>
                 <div class="btns">
                     <div class="btn">
-                        <a class="button" href="/create_ad">Создать объявление</a>
+                        <a class="button" id='bttn_create_ad' href="/create_ad">Создать объявление</a>
                     </div>
 
                     <div class="nav">
@@ -42,8 +42,9 @@
                         <img id="img" src="/public/content/img/profile.png" alt="">
                     </div>
                 </div>
-                <div class="ed-btn">
-                    <a class="button" id="bttn_edit" href="/edit_profile/1">Редактировать</a>
+                <div class="profile_btn">
+                    <a class="button" id="bttn_exit" onclick="logout()">Выйти</a>
+                    <a class="button" id="bttn_edit" href="/edit_profile">Редактировать</a>
                 </div>
             </div>
             <div class="text_account">
@@ -51,13 +52,13 @@
                     <p><b>Имя:</b></p>
                     <p><b>Фамилия:</b></p>
                     <p><b>Почта:</b></p>
-                    <p><b>Создание мероприятий:</b></p>
+                    <p><b>Статус:</b></p>
                 </div>
                 <div class="info_text">
                     <p id="first_name"></p>
                     <p id="last_name"></p>
                     <p id="email"></p>
-                    <p id="status"></p>
+                    <p id="role"></p>
                 </div>
             </div>
         </div>

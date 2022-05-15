@@ -12,17 +12,19 @@ class TypeController {
     }
     async getTypes(req, res) {
         const sql = await db.query(
-            `SELECT id, name
-            FROM public.types`
+            `SELECT t.id, t.name, r.name as low_role_to_create
+            FROM public.types as t
+            JOIN roles as r ON id_low_role_to_create = r.id`
         )
         res.json(sql.rows)
     }
     async getOneType(req, res) {
         const id = req.params.id
         const sql = await db.query(
-            `SELECT id, name
-            FROM public.types
-            WHERE id = $1`, [id]
+            `SELECT t.id, t.name, r.name as low_role_to_create
+            FROM public.types as t
+            JOIN roles as r ON id_low_role_to_create = r.id
+            WHERE t.id = $1`, [id]
         )
         res.json(sql.rows)
     }
@@ -42,6 +44,22 @@ class TypeController {
             WHERE id = $1`, [id]
         )
         res.json('ok')
+    }
+y
+    async getTypesForCreateAd(req, res) {
+        const role = req.user.role
+        const sql1 = await db.query(
+            `SELECT id FROM public.roles
+            WHERE name = $1`, [role]
+        )
+        const id_role = sql1.rows[0].id
+        const sql = await db.query(
+            `SELECT t.id, t.name, r.name as low_role_to_create
+            FROM public.types as t
+            JOIN roles as r ON id_low_role_to_create = r.id
+            WHERE r.id <= $1`, [id_role]
+        )
+        res.json(sql.rows)
     }
 }
 module.exports = new TypeController()

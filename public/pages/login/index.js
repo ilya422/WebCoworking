@@ -2,7 +2,7 @@ async function login() {
     email = document.getElementById("email").value
     password = document.getElementById("password").value
 
-    if (email == '' || password ==''){
+    if (email == '' || password == '') {
         console.log("Введите логин и пароль")
         return
     }
@@ -11,7 +11,7 @@ async function login() {
         "email": email,
         "password": password
     }
-    
+
     try {
         response = await fetch('/api/auth/login/', {
             method: 'POST',
@@ -19,11 +19,12 @@ async function login() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(body_json)
-        });
-        
-        console.log(await response.json())
+        }).then(
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 1000));
     }
-    catch(err) {
+    catch (err) {
         console.log(err)
         return
     }
