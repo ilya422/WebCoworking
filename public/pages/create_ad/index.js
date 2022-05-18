@@ -65,7 +65,7 @@ async function create_serAdv() {
     let tag = document.getElementById('tag').selectedIndex
 
     let success_info = document.getElementById("success_info")
-    if (name == '' || description == '' || price == '0' || img == '' || type == '0' || tag == '0') {
+    if (name == '' || description == '' || price == '0' || img == '/public/content/img/image_add.png' || type == '0' || tag == '0') {
         success_info.innerHTML = `Заполните все поля!`
         console.log(name, description, price, type, tag)
         success_info.style.display='flex'
