@@ -9,7 +9,6 @@ async function getProfileImage() {
     if (response.ok) {
         img = document.getElementById('profile_img');
         json_data = await response.json();
-        console.log(json_data)
         img.src = json_data[0].img;
 
     } else {
@@ -60,14 +59,14 @@ async function create_serAdv() {
     let description = document.getElementById('desc').value
     let price = document.getElementById('price').value
     let img = document.getElementById('form-img').src
-    // let img = '/public/content/img/usluga.png'
     let type = document.getElementById('form-type').value
     let tag = document.getElementById('tag').selectedIndex
 
     let success_info = document.getElementById("success_info")
-    if (name == '' || description == '' || price == '0' || img == '/public/content/img/image_add.png' || type == '0' || tag == '0') {
+    let img_split = img.split("/")
+    if (name == '' || description == '' || price == '0' || 
+            img_split[img_split.length-1] == 'image_add.png' || type == '0' || tag == '0') {
         success_info.innerHTML = `Заполните все поля!`
-        console.log(name, description, price, type, tag)
         success_info.style.display='flex'
         return
     }
@@ -78,11 +77,11 @@ async function create_serAdv() {
         "price": price,
         "img": img,
         "id_type": type,
-        "id_tag": tag,
-        "id_user_add": 2
+        "id_tag": tag
     }
 
     try {
+        document.getElementById("create_btn").remove()
         success_info.innerHTML = `Объявление успешно создано!`
         success_info.style.display='flex'
         let response = await fetch('/api/service_adv', {
@@ -91,12 +90,15 @@ async function create_serAdv() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(body_json)
-        });
-        await response.json();
+        }).then(
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 1000));
     }
     catch {
         success_info.innerHTML = `Неизвестная ошибка!`
         success_info.style.display='flex'
+        console.log(e)
     }
 }
 
@@ -106,12 +108,14 @@ async function create_evAdv() {
     let count_member = document.getElementById('count_mem').value
     let time_end = document.getElementById('time_end').value
     let img = document.getElementById('form-img').src
-    let type = document.getElementById('form-type').selectedIndex
+    let type = document.getElementById('form-type').value
     let tag = document.getElementById('tag').selectedIndex
 
 
     let success_info = document.getElementById("success_info")
-    if (name == '' || description == '' || count_member == '0' || time_end == '' || img == '' || type == '0' || tag == '0') {
+    let img_split = img.split("/")
+    if (name == '' || description == '' || count_member == '0' || time_end == '' ||
+            img_split[img_split.length-1] == 'image_add.png' || type == '0' || tag == '0') {
         success_info.innerHTML = `Заполните все поля!`
         success_info.style.display='flex'
         return
@@ -125,10 +129,10 @@ async function create_evAdv() {
         "img": img,
         "id_type": type,
         "id_tag": tag,
-        // "id_user_add": 2
     }
 
     try {
+        document.getElementById("create_btn").remove()
         success_info.innerHTML = `Объявление успешно создано!`
         success_info.style.display='flex'
         let response = await fetch('/api/event_adv', {
@@ -137,15 +141,17 @@ async function create_evAdv() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(body_json)
-        });
-        await response.json();
+        }).then(
+            setTimeout(function () {
+                window.location.href = '/';
+            }, 1000));
     }
-    catch {
+    catch(e) {
         success_info.innerHTML = `Неизвестная ошибка!`
         success_info.style.display='flex'
+        console.log(e);
     }
 }
-
 
 function showIMG(input) {
     var file = input.files[0];
@@ -177,7 +183,6 @@ function showIMG(input) {
     }
 }
 
-
 function viewEventFrom() {
     document.getElementById('view_form').innerHTML = `
             <div id="create_event" style='display: flex;'>
@@ -196,7 +201,7 @@ function viewEventFrom() {
                     <input class="form-name" id="time_end" type="date"><br>
                     <div class="btn">
                         <div id="success_info" style="display: none"></div><br>
-                        <a class="button" onclick="create_evAdv()">Создать</a>
+                        <a class="button" id="create_btn" onclick="create_evAdv()">Создать</a>
                     </div>
                 </div>     
 
@@ -225,7 +230,7 @@ function viewServiceFrom() {
                     <input class="form-name" id="price" min="0" type="number" value="0"><br>
                     <div class="btn">
                     <div id="success_info" style="display: none"></div><br>
-                    <a class="button" onclick="create_serAdv()">Создать</a>
+                    <a class="button" id="create_btn" onclick="create_serAdv()">Создать</a>
                 </div>
             </div>     
 

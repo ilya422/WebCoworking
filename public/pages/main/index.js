@@ -10,7 +10,6 @@ async function getProfileImage() {
     if (response.ok) {
         img = document.getElementById('profile_img');
         json_data = await response.json();
-        console.log(json_data)
         img.src = json_data[0].img;
 
     } else {
@@ -120,7 +119,7 @@ function selected_type(a) {
 function card_servise(v) {
     return `
     <div class="card-service">
-        <a href="#">
+        <a href="/service/${v.id}">
             <div class="card-image">
                 <img class="card-img" src="${v.img}">
             </div>
@@ -142,7 +141,7 @@ function card_servise(v) {
 function card_event(v) {
     return `
     <div class="card-event">
-        <a href="#">
+        <a href="/event/${v.id}">
             <div class="card-image">
                 <img class="card-img" src="${v.img}">
             </div>
