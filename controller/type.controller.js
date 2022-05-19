@@ -45,7 +45,6 @@ class TypeController {
         )
         res.json('ok')
     }
-y
     async getTypesForCreateAd(req, res) {
         const role = req.user.role
         const sql1 = await db.query(

@@ -112,9 +112,10 @@ body {
     margin-bottom: 30px;
 }
 
-.event-time {
+.event-data{
+    flex-direction: row;
     display: flex;
-}
+    }
 
 .time {
     padding-left: 5px;

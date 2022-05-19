@@ -6,15 +6,18 @@ function load_page() {
 }
 
 async function getProfileImage() {
-    let response = await fetch('/api/user/id')
-    if (response.ok) {
-        img = document.getElementById('profile_img');
-        json_data = await response.json();
-        img.src = json_data[0].img;
-
-    } else {
-        console.log('error', response.status);
+    try {
+        let response = await fetch('/api/user/id')
+        if (response.ok) {
+            json_data = await response.json();
+            img = document.getElementById('profile_img');
+            img.src = json_data[0].img;
+    
+        } else {
+            console.log('error', response.status);
+        }
     }
+    catch {}
 }
 
 async function getTypes() {

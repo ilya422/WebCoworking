@@ -134,6 +134,10 @@ body {
     justify-content: space-around;
 }
 
+.cards{
+    margin-bottom: 30px;
+}
+
 .cards-holder{
     display: grid;
     grid-template-columns: auto auto auto;
