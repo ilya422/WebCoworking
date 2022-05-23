@@ -28,7 +28,7 @@ class serAdvController {
         const sql = await db.query(
             `SELECT ser.id, ser.name, ser.description,
             ser.price, u.email,
-            ser.img, ty.name as type, tg.name as tag, ser.id_user_add, ser.time_add
+            ser.img, ty.name as type, tg.name as tag, tg.id as id_tag, ser.id_user_add, ser.time_add
             FROM public.service_advs as ser
             JOIN users as u ON ser.id_user_add = u.id
             JOIN types as ty ON ser.id_type = ty.id
@@ -38,13 +38,11 @@ class serAdvController {
         res.json(sql.rows[0])
     }
     async update_serAdv(req, res) {
-        const { id, name, description, price, img, id_type, id_tag } = req.body
-        const id_user_add = req.user.id
+        const { id, name, description, price, img, id_tag } = req.body
         const sql = await db.query(
             `UPDATE public.service_advs
-            name=$1, description=$2, price=$3, img=$4,
-            id_type=$5, id_tag=$6, id_user_add=$7, time_add=$8
-            WHERE id = $9`, [name, description, price, img, id_type, id_tag, id_user_add, id]
+            SET name=$1, description=$2, price=$3, img=$4, id_tag=$5
+            WHERE id = $6`, [name, description, price, img, id_tag, id]
         )
         res.json('ok')
     }

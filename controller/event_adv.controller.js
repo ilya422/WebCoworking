@@ -40,7 +40,7 @@ class evAdvController {
         const sql = await db.query(
             `SELECT ev.id, ev.name, ev.description,
             ev.count_member, ev.current_member, to_char(DATE(time_end), 'DD-MM-YYYY') as time_end, 
-            ev.img, ty.name as type, tg.name as tag, ev.id_user_add, ev.time_add
+            ev.img, ty.name as type, tg.name as tag, tg.id as id_tag, ev.id_user_add, ev.time_add
             FROM public.event_advs as ev
             JOIN types as ty ON ev.id_type = ty.id
             JOIN tags as tg ON ev.id_tag = tg.id
@@ -49,13 +49,11 @@ class evAdvController {
         res.json(sql.rows[0])
     }
     async update_evAdv(req, res) {
-        const {id, name, description, count_member, current_member, time_end, img, id_type, id_tag, time_add} = req.body
-        const id_user_add = req.user.id
+        const {id, name, description, count_member, time_end, img, id_tag} = req.body
         const sql = await db.query(
             `UPDATE public.event_advs
-            name=$1, description=$2, count_member=$3, current_member=$4, time_end=$5, img=$6,
-            id_type=$7, id_tag=$8, id_user_add=$9, time_add=$10
-            WHERE id = $11`, [name, description, count_member, current_member, time_end, img, id_type, id_tag, id_user_add, time_add, id]
+            SET name=$1, description=$2, count_member=$3, time_end=$4, img=$5, id_tag=$6
+            WHERE id = $7`, [name, description, count_member, time_end, img, id_tag, id]
         )
         res.json('ok')
     }

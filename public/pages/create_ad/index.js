@@ -64,18 +64,13 @@ async function create_serAdv() {
 
     let success_info = document.getElementById("success_info")
     let img_split = img.split("/")
-    if (name == '' || description == '' || price == '0' || 
-            img_split[img_split.length-1] == 'image_add.png' || type == '0' || tag == '0') {
+    if (name == '' || description == '' || img_split[img_split.length-1] == 'image_add.png' || type == '0' || tag == '0') {
         success_info.innerHTML = `Заполните все поля!`
         success_info.style.display='flex'
         return
     }
 
-    new_description = description.replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/\n/g, '</p><p>')
-                .replace(/(<p><\/p>)+/g, '<br>');
-
+    new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
     let body_json = {
         "name": name,
         "description": new_description,
@@ -126,10 +121,7 @@ async function create_evAdv() {
         return
     }
 
-    new_description = description.replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/\n/g, '</p><p>')
-                .replace(/(<p><\/p>)+/g, '<br>');
+    new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
 
     let body_json = {
         "name": name,

@@ -15,14 +15,20 @@ router.use('/service/:id',
 router.use('/event/:id',
     Router.static(path.resolve('public/pages/event_view')))
 
+router.use('/service_edit/:id', authMiddleware,
+    Router.static(path.resolve('public/pages/service_edit')))
+
+router.use('/event_edit/:id', authMiddleware,
+    Router.static(path.resolve('public/pages/event_edit')))
+
 router.use('/our_events', authMiddleware,
     Router.static(path.resolve('public/pages/our_events')))
 
 router.use('/profile', authMiddleware,
     Router.static(path.resolve('public/pages/profile')))
 
-router.use('/edit_profile', authMiddleware,
-    Router.static(path.resolve('public/pages/edit_profile')))
+router.use('/profile_edit', authMiddleware,
+    Router.static(path.resolve('public/pages/profile_edit')))
 
 router.use('/login',
     Router.static(path.resolve('public/pages/login')))
