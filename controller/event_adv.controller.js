@@ -23,6 +23,18 @@ class evAdvController {
         )
         res.json(sql.rows)
     }
+    async get_evAdvsForMain(req, res) {
+        const sql = await db.query(
+            `SELECT ev.id, ev.name, ev.description,
+            ev.count_member, ev.current_member, to_char(DATE(time_end), 'DD-MM-YYYY') as time_end, time_end as time_sort,
+            ev.img, ty.name as type, tg.name as tag, ev.id_user_add, ev.time_add
+            FROM public.event_advs as ev
+            JOIN types as ty ON ev.id_type = ty.id
+            JOIN tags as tg ON ev.id_tag = tg.id
+            WHERE current_member < count_member`
+        )
+        res.json(sql.rows)
+    }
     async getOne_evAdv(req, res) {
         const id = req.params.id
         const sql = await db.query(

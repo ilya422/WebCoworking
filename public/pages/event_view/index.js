@@ -66,7 +66,8 @@ async function respond() {
     if (respond_btn.innerHTML == "Откликнуться") {
         let body_json_sub = {
             "id_event_adv": id_event_adv,
-            "current_member": current_member + 1
+            "current_member": current_member + 1,
+            "count_member": count_member
         }
 
         let response_sub = await fetch('/api/sub_events', {
@@ -83,8 +84,7 @@ async function respond() {
     }
     else {
         let body_json_sub = {
-            "id_event_adv": id_event_adv,
-            "current_member": current_member - 1
+            "id_event_adv": id_event_adv
         }
 
         let response_sub = await fetch('/api/sub_events', {

@@ -31,6 +31,7 @@ async function getAdv() {
         document.querySelector('.service-tag').innerHTML = "#" + json_data.tag
         document.querySelector('.service-description').innerHTML = json_data.description
         document.querySelector('.price').innerHTML = json_data.price + " руб."
+        document.querySelector('.email-user').innerHTML = json_data.email
 
     } else {
         console.log('error', response.status);

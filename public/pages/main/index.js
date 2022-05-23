@@ -23,7 +23,7 @@ async function getProfileImage() {
 async function getTypes() {
     let response = await fetch('/api/type');
     if (response.ok) {
-        div = document.querySelector('.type');
+        div = document.getElementById('type_choice');
         json_data = await response.json();
         for (var i in json_data) {
             var v = json_data[i];
@@ -73,8 +73,8 @@ async function getEventAdv() {
 
         json_data = await response_ev.json();
         json_data.sort(function (a, b) {
-            var dateA = new Date(a.time_add), dateB = new Date(b.time_add)
-            return dateB - dateA
+            var dateA = new Date(a.time_sort), dateB = new Date(b.time_sort)
+            return dateA - dateB
         });
         for (var i in json_data) {
             var v = json_data[i];

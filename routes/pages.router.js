@@ -15,6 +15,9 @@ router.use('/service/:id',
 router.use('/event/:id',
     Router.static(path.resolve('public/pages/event_view')))
 
+router.use('/our_events', authMiddleware,
+    Router.static(path.resolve('public/pages/our_events')))
+
 router.use('/profile', authMiddleware,
     Router.static(path.resolve('public/pages/profile')))
 
@@ -30,6 +33,6 @@ router.use('/registration',
 router.route('/public/content/img/*')
     .get((req, res) => {
         res.sendFile(req.url, { root: path.dirname(__dirname) });
-});
+    });
 
 module.exports = router;

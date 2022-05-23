@@ -71,9 +71,14 @@ async function create_serAdv() {
         return
     }
 
+    new_description = description.replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\n/g, '</p><p>')
+                .replace(/(<p><\/p>)+/g, '<br>');
+
     let body_json = {
         "name": name,
-        "description": description,
+        "description": new_description,
         "price": price,
         "img": img,
         "id_type": type,
@@ -121,14 +126,19 @@ async function create_evAdv() {
         return
     }
 
+    new_description = description.replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\n/g, '</p><p>')
+                .replace(/(<p><\/p>)+/g, '<br>');
+
     let body_json = {
         "name": name,
-        "description": description,
+        "description": new_description,
         "count_member": count_member,
         "time_end": time_end,
         "img": img,
         "id_type": type,
-        "id_tag": tag,
+        "id_tag": tag
     }
 
     try {

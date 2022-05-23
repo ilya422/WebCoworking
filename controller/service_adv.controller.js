@@ -27,9 +27,10 @@ class serAdvController {
         const id = req.params.id
         const sql = await db.query(
             `SELECT ser.id, ser.name, ser.description,
-            ser.price, 
+            ser.price, u.email,
             ser.img, ty.name as type, tg.name as tag, ser.id_user_add, ser.time_add
             FROM public.service_advs as ser
+            JOIN users as u ON ser.id_user_add = u.id
             JOIN types as ty ON ser.id_type = ty.id
             JOIN tags as tg ON ser.id_tag = tg.id
             WHERE ser.id = $1`, [id]

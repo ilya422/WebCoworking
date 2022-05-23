@@ -44,7 +44,7 @@ body {
     position: relative;
 }
 
-input[type='text'] 
+input[type='text'], input[type='password']
 { 
     font-size: 17px;
     width: 90%; 
@@ -60,7 +60,7 @@ input[type='text']
     justify-content:space-around;
     align-items:center;
     flex-wrap:wrap;
-  }
+}
 
 #no-registred{
     position: absolute;

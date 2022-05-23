@@ -24,7 +24,7 @@
                 </div>
                 <div class="btns">
                     <div class="create-item">
-                        <a class="button" href="/create_ad">Создать объявление</a>
+                        <a class="button" id="btn-create" href="/create_ad">Создать объявление</a>
                     </div>
 
                     <div class="nav">
@@ -42,28 +42,23 @@
     </div>
 
     <div class="container">
-        <div class="event-form">
-            <div class="event-img">
-                <img class="inf" id="event-img" src="" alt="">
-            </div>
-            <div class="event-text">
-                <div class="event-name"></div>
-                <div class="event-tag"></div>
-                <p class="event-description"></p>
-                <div class="event-data">
-                    <div><b>Дата окончания набора:</b></div>
-                    <div class="time" id="event-data"></div>
-                </div>
+        <div class="card-event">
 
-            </div>
-            <div class="click-item">
-                <a class="button" id="respond_btn" onclick="respond()">Откликнуться</a>
-            </div>
-            <div class="event-people"></div>
 
         </div>
     </div>
-
+    
+    <div class="b-popup" style="display: none;" >
+        <div class="b-popup-content">
+            <div class="popup-answer"> Вы уверены, что хотите отменить участие?</div>
+            <div class="btns-popup">
+                <div class="click-item">
+                    <a class="btn-delete"  onclick="close_modal(true)">Да</a>
+                </div>
+                <a id="btn-cancel" onclick="close_modal(false)">Нет</a>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="index.js"></script>
 </html>

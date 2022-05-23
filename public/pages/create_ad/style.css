@@ -52,6 +52,13 @@ body {
     height: 80px;
 }
 
+.cart-img {
+    position: absolute;
+    top: 2px;
+    height: 93px;
+    border-radius: 50%;
+}
+
 .create_form {
     background-color: rgba(198, 198, 198, 0.226);
     margin: 50px 350px;
