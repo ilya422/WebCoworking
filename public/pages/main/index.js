@@ -97,7 +97,7 @@ async function getServiceAdv() {
             var dateA = new Date(a.time_add), dateB = new Date(b.time_add)
             return dateB - dateA
         });
-        for (var i in json_data) {npm
+        for (var i in json_data) {
             var v = json_data[i];
             div.innerHTML += card_servise(v);
         }
