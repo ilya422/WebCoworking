@@ -35,6 +35,19 @@ class evAdvController {
         )
         res.json(sql.rows)
     }
+    async get_evAdvByUser(req, res) {
+        const id_user = req.user.id
+        const sql = await db.query(
+            `SELECT ev.id, ev.name, ev.description,
+            ev.count_member, ev.current_member, to_char(DATE(time_end), 'DD-MM-YYYY') as time_end, 
+            ev.img, ty.name as type, tg.name as tag, ev.id_user_add, ev.time_add
+            FROM public.event_advs as ev
+            JOIN types as ty ON ev.id_type = ty.id
+            JOIN tags as tg ON ev.id_tag = tg.id
+            WHERE ev.id_user_add = $1`, [id_user]
+        )
+        res.json(sql.rows)
+    }
     async getOne_evAdv(req, res) {
         const id = req.params.id
         const sql = await db.query(
@@ -58,7 +71,7 @@ class evAdvController {
         res.json('ok')
     }
     async delete_evAdv(req, res) {
-        const id = req.params.id
+        const id = req.body.id
         const sql = await db.query(
             `DELETE FROM public.event_advs
             WHERE id = $1`, [id]

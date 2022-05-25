@@ -23,6 +23,19 @@ class serAdvController {
         )
         res.json(sql.rows)
     }
+    async get_serAdvByUser(req, res) {
+        const id_user = req.user.id
+        const sql = await db.query(
+            `SELECT ser.id, ser.name, ser.description,
+            ser.price, 
+            ser.img, ty.name as type, tg.name as tag, ser.id_user_add, ser.time_add
+            FROM public.service_advs as ser
+            JOIN types as ty ON ser.id_type = ty.id
+            JOIN tags as tg ON ser.id_tag = tg.id
+            WHERE ser.id_user_add = $1`, [id_user]
+        )
+        res.json(sql.rows)
+    }
     async getOne_serAdv(req, res) {
         const id = req.params.id
         const sql = await db.query(
@@ -47,7 +60,7 @@ class serAdvController {
         res.json('ok')
     }
     async delete_serAdv(req, res) {
-        const id = req.params.id
+        const id = req.body.id
         const sql = await db.query(
             `DELETE FROM public.service_advs
             WHERE id = $1`, [id]

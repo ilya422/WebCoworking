@@ -24,6 +24,9 @@ router.use('/event_edit/:id', authMiddleware,
 router.use('/our_events', authMiddleware,
     Router.static(path.resolve('public/pages/our_events')))
 
+router.use('/our_ad', authMiddleware,
+    Router.static(path.resolve('public/pages/our_ad')))
+
 router.use('/profile', authMiddleware,
     Router.static(path.resolve('public/pages/profile')))
 

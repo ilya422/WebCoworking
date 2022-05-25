@@ -46,7 +46,7 @@ async function respond(id_event_adv) {
             "id_event_adv": id_event_adv
         }
 
-        let response_sub = await fetch('/api/sub_events', {
+        let response_sub = await fetch('/api/event_adv', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
