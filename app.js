@@ -10,6 +10,7 @@ const userSubEventRouter = require('./routes/user_sub_event_advs.router')
 const typeRouter = require('./routes/type.router')
 const tagRouter = require('./routes/tag.router')
 const authRouter = require('./routes/auth.router')
+const emailRouter = require('./routes/email.router')
 
 app.use(express.json({limit: '50mb'}));
 app.use(cookieParser());
@@ -22,6 +23,7 @@ app.use(userSubEventRouter)
 app.use(typeRouter)
 app.use(tagRouter)
 app.use(authRouter)
+app.use(emailRouter)
 
 var nowTime = new Date();
 var tomorrowTime = new Date().setHours(24, 0, 0);

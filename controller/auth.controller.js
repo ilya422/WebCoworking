@@ -2,6 +2,7 @@ const userController = require('./user.controller')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { secret } = require('../config')
+const { password } = require('pg/lib/defaults')
 
 const generateAccessToken = (id, role) => {
     const payload = {
@@ -54,6 +55,21 @@ class AuthController {
         }
     }
 
+    async newPassword(req, res) {
+        try {
+            const { email, password } = req.body
+            const candidate = await userController.findOneUserByEmail({ email });
+            if (candidate.length == 0) {
+                return res.status(400).json({ message: "Пользователь не существует" })
+            }
+            const hashPassword = bcrypt.hashSync(password, 7)
+            await userController.createUserFromForgot({ email, hashPassword })
+            return res.json({ message: "Пароль изменён" })
+        } catch (e) {
+            console.log(e)
+            return res.status(400).json({ message: 'Ошибка при регистрации' })
+        }
+    }
 
     async logout(req, res) {
         return res

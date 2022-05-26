@@ -78,5 +78,15 @@ class UserController {
         )
         return
     }
+
+    async createUserFromForgot(req) {
+        const {email, hashPassword} = req
+        const sql = await db.query(
+            `UPDATE public.users
+            SET password=$1
+            WHERE email = $2`, [hashPassword, email]
+        )
+        return
+    }
 }
 module.exports = new UserController()
