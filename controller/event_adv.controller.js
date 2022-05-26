@@ -78,5 +78,13 @@ class evAdvController {
         )
         res.json('ok')
     }
+
+    async delete_evAdv_ByTime(time) {
+        const sql = await db.query(
+            `DELETE FROM public.event_advs
+            WHERE time_end <= $1`, [time]
+        )
+        return
+    }
 }
 module.exports = new evAdvController()
