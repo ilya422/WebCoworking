@@ -12,6 +12,14 @@ const generateAccessToken = (id, role) => {
     return jwt.sign(payload, secret, { expiresIn: "2h" })
 }
 
+const generateRecoveryToken = (id, code) => {
+    const payload = {
+        id,
+        code
+    }
+    return jwt.sign(payload, secret, { expiresIn: "10m" })
+}
+
 class AuthController {
     async registration(req, res) {
         try {
@@ -55,27 +63,28 @@ class AuthController {
         }
     }
 
-    async newPassword(req, res) {
+    async recoveryPasswordToken(req, res) {
         try {
-            const { email, password } = req.body
-            const candidate = await userController.findOneUserByEmail({ email });
-            if (candidate.length == 0) {
-                return res.status(400).json({ message: "Пользователь не существует" })
+            const { email, code } = req.body
+            const User = await userController.findOneUserByEmail({ email })
+            if (User.length == 0) {
+                return res.json({ message: `Пользователь ${email} не найден` })
             }
-            const hashPassword = bcrypt.hashSync(password, 7)
-            await userController.createUserFromForgot({ email, hashPassword })
-            return res.json({ message: "Пароль изменён" })
+            const user = User[0]
+            const token = generateRecoveryToken(user.id, code)
+            return res.json({message: 'Пользователь найден' , token});
+
         } catch (e) {
             console.log(e)
-            return res.status(400).json({ message: 'Ошибка при регистрации' })
+            return res.json({ message: 'Ошибка при создании ссылки' })
         }
     }
 
     async logout(req, res) {
         return res
-        .clearCookie("access_token")
-        .status(200)
-        .json({ message: "Выход выполнен"});
+            .clearCookie("access_token")
+            .status(200)
+            .json({ message: "Выход выполнен" });
     }
 }
 

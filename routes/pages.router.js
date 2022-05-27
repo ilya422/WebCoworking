@@ -39,6 +39,9 @@ router.use('/login',
 router.use('/registration',
     Router.static(path.resolve('public/pages/registration')))
 
+router.use('/recovery_pass/:token',
+    Router.static(path.resolve('public/pages/recovery_pass')))
+
 router.route('/public/content/img/*')
     .get((req, res) => {
         res.sendFile(req.url, { root: path.dirname(__dirname) });

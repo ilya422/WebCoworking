@@ -30,17 +30,18 @@
         <div class="login-form">
             <div class="login">
                 <p class="question">Вход</p>
-                <p><input class="answer" id="email" type="text" size="40" placeholder="Почта@study.utmn.ru"></p>
-                <p><input class="answer" id="password" type="password" size="40" placeholder="Пароль"></p>
+                <p><input id="email" type="text" size="40" placeholder="Почта@study.utmn.ru"></p>
+                <p><input id="password" type="password" size="40" placeholder="Пароль"></p>
             </div>
             <div class="btns-problem">
                 <a class="button-problem" id="no-registred" href="/registration">Не зарегистрированы?</a><br>
-                <a class="button-problem" id="forget-password" onclick="forget_password()">Забыли пароль?</a>
+                <a class="button-problem" id="forget-password" onclick="forget_password()" href="#">Забыли пароль?</a>
             </div><br>
             <a class="button-login" onclick="login()">Войти</a>
+            <div class="attention" style="display: none;"></div>
         </div>
-
     </div>
+
 
 </body>
 <script src="index.js"></script>>

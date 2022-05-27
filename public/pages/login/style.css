@@ -96,6 +96,29 @@ input[type='text'], input[type='password']
     background-color: rgb(34, 76, 118);
 }
 
+#recovery{
+    width: 70%;
+}
+
+.attention{
+    margin-top: 10px;
+    border-radius: 20px;
+    background-color: rgb(255, 177, 177);
+    padding: 11px 13px;
+    width: 60%;
+    text-align: center;
+}
+
+.attention-code{
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: rgb(255, 177, 177);
+    padding: 9px 9px;
+    width: 40%;
+    text-align: center;
+}
+
+
 @media (max-width: 1200px){
     .container{
         max-width: 970px;
@@ -132,5 +155,9 @@ input[type='text'], input[type='password']
     #forget-password{
         position: static;
         right: auto;
+    }
+
+    .attention{
+        width: 90%;
     }
 }

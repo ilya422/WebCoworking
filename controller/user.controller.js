@@ -1,4 +1,5 @@
 const db = require('../database/db')
+const bcrypt = require('bcryptjs');
 
 class UserController {
     async createUser(req, res) {
@@ -8,7 +9,7 @@ class UserController {
             first_name, last_name, email, password)
             VALUES ($1, $2, $3, $4)`, [first_name, last_name, email, password]
         )
-        res.json('ok')
+        res.json({message: "Пользователь создан"})
     }
     async getUsers(req, res) {
         const id = req.params.id
@@ -48,6 +49,17 @@ class UserController {
             WHERE id = $5`, [first_name, last_name, email, img, id]
         )
         res.json('ok')
+    }
+    async updateUserPasswordRecovery(req, res) {
+        const id = req.user.id
+        const password = req.body.password
+        const hashPassword = bcrypt.hashSync(password, 7)
+        const sql = await db.query(
+            `UPDATE public.users
+            SET password = $1
+            WHERE id = $2`, [hashPassword, id]
+        )
+        res.json({ message: 'Пароль обновлён'})
     }
     async deleteUser(req, res) {
         const id = req.params.id

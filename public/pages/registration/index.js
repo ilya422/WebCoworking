@@ -1,4 +1,6 @@
 async function registration() {
+    info_div = document.querySelector('.attention')
+    info_div.style.display='none'
     first_name = document.getElementById("first_name").value
     last_name = document.getElementById("last_name").value
     email = document.getElementById("email").value
@@ -7,18 +9,21 @@ async function registration() {
 
 
     if (first_name.trim() == '' || last_name.trim() == '' || email.trim() == '' || password1.trim() == '' || password2.trim() == '') {
-        console.log(`Заполните все поля!`)
+        info_div.innerHTML = "Заполните все поля!"
+        info_div.style.display='flex'
         return
     }
 
 
     if (email.split("@")[1] != "study.utmn.ru") {
-        console.log("Email должен содержать @study.utmn.ru")
+        info_div.innerHTML = "Email должен содержать @study.utmn.ru"
+        info_div.style.display='flex'
         return
     }
 
     if (password1 != password2) {
-        console.log(`Пароли отличаются!`)
+        info_div.innerHTML = "Пароли отличаются!"
+        info_div.style.display='flex'
         return
     }
 
@@ -36,10 +41,19 @@ async function registration() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(body_json)
-        }).then(
+        })
+        json_data = await response.json();
+        if (json_data.message == "Пользователь создан") {
+            info_div.innerHTML = json_data.message
+            info_div.style.display='flex'
             setTimeout(function () {
                 window.location.href = '/login';
-            }, 1000));
+            }, 1000);
+        }
+        else {
+            info_div.innerHTML = json_data.message
+            info_div.style.display='flex'
+        }
     }
     catch(err) {
         console.log(err)

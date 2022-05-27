@@ -20,7 +20,7 @@ exports.contact = function (req, res){
     var mailOptions = {
         from: from,
         to: to, 
-        subject: name + ' | new message !',
+        subject: name,
         text: message
     }
 

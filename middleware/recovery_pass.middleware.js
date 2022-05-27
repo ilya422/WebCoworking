@@ -7,15 +7,14 @@ module.exports = function (req, res, next) {
     }
 
     try {
-        const token = req.cookies.access_token;
+        const token = req.params.token;
         if (!token) {
-            return res.redirect('/login');
+            return res.json({message: "Токен не найден"});
         }
         const decodedData = jwt.verify(token, secret)
         req.user = decodedData
         next()
     } catch (e) {
-        res.clearCookie("access_token")
-        return res.redirect('/login');
+        return res.json({e});
     }
 }

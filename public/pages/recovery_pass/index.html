@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Восстановление</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,28 +20,24 @@
                 <a class="logo-img" href="/">
                     <img src="/public/content/img/utmn.png" alt="">
                 </a>
-                <a class="registration-img" href="/profile">
+                <a class="recovery-img" href="/profile">
                     <img class="cart-img" src="/public/content/img/profile.png" alt="">
                 </a>
             </div>
         </div>
     </div>
     <div class="container">
-        <div class="registration-form">
-            <div class="registration">
-                <p class="question">Регистрация</p>
-                <p><input required class="answer" id="first_name" type="text" size="40" placeholder="Имя"></p>
-                <p><input required class="answer" id="last_name" type="text" size="40" placeholder="Фамилия"></p>
-                <p><input required class="answer" id="email" type="text" size="40" placeholder="Почта@study.utmn.ru"></p>
-                <p><input required class="answer" id="password1" type="text" size="40" placeholder="Пароль"></p>
-                <p><input required class="answer" id="password2"  type="text" size="40" placeholder="Повторите пароль"></p>
-            </div><br>
-            <a class="button-registration" onclick="registration()">Зарегистрироваться</a><br>
+        <div class="recovery-form">
+            <div class="recovery">
+                <p><input id="password" type="text" size="40" placeholder="Пароль"></p>
+                <p><input id="repeat-password" type="text" size="40" placeholder="Повторите пароль"></p>
+            </div>
+            <a class="button-recovery" onclick="recovery()">Восстановить</a>
             <div class="attention" style="display: none;"></div>
         </div>
-
     </div>
 
 </body>
-<script src="index.js"></script>
+<script src="index.js"></script>>
+
 </html>
