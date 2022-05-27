@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const {email_pass} = require('../config')
 
 exports.contact = function (req, res){
     var name = req.body.name;
@@ -12,7 +13,7 @@ exports.contact = function (req, res){
         secure: true,
         auth: {
             user: from,
-            pass: ''
+            pass: email_pass
         }
     };
     var smtpTransport = nodemailer.createTransport(smtpConfig);
