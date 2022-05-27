@@ -1,24 +1,6 @@
 const userController = require('./user.controller')
+const tokensController = require('./tokens.controller') 
 const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
-const { secret } = require('../config')
-const { password } = require('pg/lib/defaults')
-
-const generateAccessToken = (id, role) => {
-    const payload = {
-        id,
-        role
-    }
-    return jwt.sign(payload, secret, { expiresIn: "2h" })
-}
-
-const generateRecoveryToken = (id, code) => {
-    const payload = {
-        id,
-        code
-    }
-    return jwt.sign(payload, secret, { expiresIn: "10m" })
-}
 
 class AuthController {
     async registration(req, res) {
@@ -49,13 +31,9 @@ class AuthController {
             if (!validPassword) {
                 return res.json({ message: 'Неверный пароль' })
             }
-            const token = generateAccessToken(user.id, user.role)
-            return res
-                .cookie("access_token", token, {
-                    httpOnly: true,
-                    secure: process.env.NODE_ENV === "production",
-                })
-                .json({ message: "Вход выполнен успешно" });
+            
+            await tokensController.createTokens(user.id, user.role, res)
+            return res.json({ message: "Вход выполнен успешно" });
 
         } catch (e) {
             console.log(e)
@@ -71,8 +49,8 @@ class AuthController {
                 return res.json({ message: `Пользователь ${email} не найден` })
             }
             const user = User[0]
-            const token = generateRecoveryToken(user.id, code)
-            return res.json({message: 'Пользователь найден' , token});
+            const tokenRecovery = tokensController.createRecoveryToken(user.id, code)
+            return res.json({message: 'Пользователь найден' , tokenRecovery});
 
         } catch (e) {
             console.log(e)
@@ -81,10 +59,13 @@ class AuthController {
     }
 
     async logout(req, res) {
-        return res
-            .clearCookie("access_token")
-            .status(200)
-            .json({ message: "Выход выполнен" });
+        await tokensController.deleteTokens(req.cookies.access_token, res)
+        return res.json({ message: "Выход выполнен" });
+    }
+
+    async logoutAll(req, res) {
+        await tokensController.deleteAllUserTokens(req.user.id, res)
+        return res.json({ message: "Выход со всех устройств выполнен" });
     }
 }
 

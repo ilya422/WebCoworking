@@ -34,7 +34,7 @@ var port = normalizePort(process.env.PORT || '8080');
 var server = app.listen(port, () => {
     var port = server.address().port;
     console.log('Listening on http://127.0.0.1:' + port);
-    deleteOldEvent()
+    deleteOld()
 })
 
 function normalizePort(val) {
@@ -48,14 +48,17 @@ function normalizePort(val) {
     return false;
 }
 
-async function deleteOldEvent() {
+async function deleteOld() {
     try{
-        const eventController = require('./controller/event_adv.controller')
-        await eventController.delete_evAdv_ByTime(nowTime)
-        console.log(`След. проверка мероприятий через ${parseInt(tomorrowTime - nowTime) / 1000 / 3600} часа`)
+        const {delete_evAdv_ByTime} = require('./controller/event_adv.controller')
+        const {deleteOldTokens} = require('./controller/tokens.controller')
+        await delete_evAdv_ByTime(nowTime)
+        await deleteOldTokens(nowTime)
+        console.log(`След. очистка старых данных через ${parseInt(tomorrowTime - nowTime) / 1000 / 3600} часа`)
     }
     catch(e) {
-        console.log(`Ошибка удаления мероприятий`, e)
+        console.log(`Ошибка удаления мероприятий: `, e)
     }
 }
-setInterval(() => deleteOldEvent(), parseInt(tomorrowTime - nowTime));
+
+setInterval(() => deleteOld(), parseInt(tomorrowTime - nowTime));
