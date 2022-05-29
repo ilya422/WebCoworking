@@ -86,6 +86,33 @@ class UserController {
         res.json('ok')
     }
 
+    async updateUserWithPassword(req, res) {
+        const id = req.user.id
+        const {first_name, last_name, email, img} = req.body
+        const old_password = req.body.old_password
+        const new_password = req.body.new_password
+
+        const sql_get = await db.query(
+            `SELECT id, password
+            FROM public.users
+            WHERE id = $1`, [id]
+        )
+        const user = sql_get.rows[0]
+        const validPassword = bcrypt.compareSync(old_password, user.password)
+        if (!validPassword) {
+            return res.json({ message: 'Неверный пароль' })
+        }
+        else {
+            const hashPassword = bcrypt.hashSync(new_password, 7)
+            const sql_update = await db.query(
+                `UPDATE public.users
+                SET first_name=$1, last_name=$2, email=$3, img=$4, password = $5
+                WHERE id = $6`, [first_name, last_name, email, img, hashPassword, id]
+            )
+            return res.json({ message: 'ok'})
+        }
+    }
+
     async updateUserPasswordRecovery(req, res) {
         const id = req.user.id
         const password = req.body.password

@@ -31,23 +31,29 @@ body {
     transition: color 0.3s linear;
 }
 
-.nav-item:hover{
+.nav-item:hover {
     color: rgb(125, 179, 212);
 }
 
 
 .info {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 30px 10px;
     background-color: rgba(220, 220, 220, 0.515);
-    padding: 50px;
+    padding: 50px 50px 30px 50px;
     border-radius: 15px;
 }
 
-.block_image{
+.block_image {
     flex-direction: column;
     text-align: center;
     position: relative
+}
+
+.text_info{
+    display: flex;
 }
 
 #img {
@@ -65,19 +71,27 @@ body {
 }
 
 .title_text {
-    padding-right: 17px;  
+    padding-right: 17px;
     font-family: 'Tinos', serif;
     font-size: 20px;
     font-weight: bold;
 }
 
-.info_text{
+.info_text {
     font-family: 'Tinos', serif;
     font-size: 20px;
 }
 
-.input_text{
-    margin-top: 20px;  
+.input_text {
+    margin-top: 20px;
+}
+
+type[text]{
+    width: 200px;
+}
+
+#new_pass_repeat{
+    margin-bottom: 15px;
 }
 
 .btn {
@@ -85,15 +99,16 @@ body {
 }
 
 .succec-btn {
-    padding-top: 20px;
+    padding-top: 10px;
     font-size: 16px;
 }
 
-.img-edit{
-    display:flex;
+.img-edit {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-right: 50px;
+    text-align: center;
 }
 
 .btns {
@@ -113,17 +128,176 @@ body {
     transition: background-color 0.2s linear;
 }
 
-.button:hover{
+.button:hover {
     background-color: rgb(34, 76, 118);
 }
 
-#success_info{
-    width: auto;
+#success_info {
+    width: 70%;
+    display: flex;
     height: 30px;
-    background-color: rgba(226, 190, 60, 0.6);
+    background-color: rgba(237, 201, 71, 0.659);
     padding: 10px;
+    border-radius: 10px;
     text-align: center;
     display: table-cell;
     vertical-align: middle;
     font-family: 'Open Sans', sans-serif;
+    margin-top: 20px;
+}
+
+
+@media (max-width: 1300px) {
+    .nav-item {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .button {
+        padding: 11px 11px;
+    }
+
+    .btns {
+        padding-left: 120px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 970px;
+    }
+
+    .img-block {
+        padding-left: 0px;
+        margin-bottom: 15px;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-item {
+        font-size: 15px;
+        font-weight: 600;
+        margin: 10px 0px;
+    }
+
+    .btns {
+        align-items: center;
+        padding-left: 20px;
+        padding-left: 80px;
+    }
+
+    .title {
+        display: flex;
+        justify-content: center;
+    }
+
+    .button {
+        padding: 11px 13px;
+    }
+
+}
+
+@media (max-width: 1120px) {
+    .text_info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+}
+
+@media (max-width: 992px) {
+    .container {
+        max-width: 750px;
+    }
+
+    .header-line {
+        padding: 20px 0px 0px 0px;
+        justify-content: center;
+    }
+
+    .nav-item {
+        margin: 10px 0px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .btns {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding-left: 80px;
+    }
+
+    .btn {
+        margin-bottom: 10px;
+        margin-right: 0px;
+    }
+
+    .img-edit {
+        margin-right: 0px;
+    }
+
+    .info{
+        margin: 20px;
+    }
+
+    .title_text{
+        font-size: 17px;
+    }
+
+    #bttn_edit, #bttn_back{
+        font-size: 14px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .container {
+        max-width: none;
+        margin: auto 20px;
+    }
+
+    .header-logo {
+        margin-right: 20px;
+    }
+
+    .nav-item {
+        padding: 10px 0px;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0px;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btns {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        padding-left: 0px;
+    }
+
+    .button {
+        padding: 8px 10px;
+        display: initial;
+        text-align: center;
+    }
+
+    .create-item {
+        margin-right: 0px;
+    }
+
+    #bttn_edit, #bttn_back{
+        font-size: 16px;
+    }
+
 }
