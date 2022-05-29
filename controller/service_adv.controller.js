@@ -13,6 +13,9 @@ class serAdvController {
         res.json('ok')
     }
     async get_serAdvs(req, res) {
+        // const page = req.params.page
+        // const page = 1
+        // const itemsPerPage = 9
         const sql = await db.query(
             `SELECT ser.id, ser.name, ser.description,
             ser.price, 
@@ -20,6 +23,7 @@ class serAdvController {
             FROM public.service_advs as ser
             JOIN types as ty ON ser.id_type = ty.id
             JOIN tags as tg ON ser.id_tag = tg.id`
+            // LIMIT ${itemsPerPage} OFFSET (${page} - 1) * ${itemsPerPage}`
         )
         res.json(sql.rows)
     }

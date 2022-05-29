@@ -1,6 +1,3 @@
-// const EmailController = require("../../../controller/email.controller");
-// const { getSubByTag } = require("../../../controller/user_sub_evtags.controller");
-
 window.onload = load_page()
 function load_page() {
     getProfileImage();
@@ -154,7 +151,7 @@ async function create_evAdv() {
             sendMainForSubEvTag(tag, json_data.id),
             setTimeout(function () {
                 window.location.href = '/';
-            }, 10000)
+            }, 1000)
         };
     }
     catch (e) {
@@ -174,8 +171,6 @@ async function sendMainForSubEvTag(id_tag, id_ev) {
             "users": users,
             "url": ev_url
         }
-
-        console.log(body_json_send)
 
         fetch('/api/email/list', {
             method: 'POST',
