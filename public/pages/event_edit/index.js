@@ -66,6 +66,7 @@ async function getAdv() {
         var date = json_data.time_end.split('-')
         date = date[2] + "-" + date[1] + "-" + date[0]
         document.querySelector('.event-date').value = date
+        document.querySelector('.event-date').setAttribute('min', new Date().toISOString().slice(0, 10))
     } else {
         console.log('error', response.status);
     }

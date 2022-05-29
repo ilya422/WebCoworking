@@ -9,7 +9,7 @@ const service_advRouter = require('./routes/service_adv.router')
 const userSubEventRouter = require('./routes/user_sub_event_advs.router')
 const typeRouter = require('./routes/type.router')
 const tagRouter = require('./routes/tag.router')
-const userSubTagsRouter = require('./routes/user_sub_tags.router')
+const userSubTagsRouter = require('./routes/user_sub_evtags.router')
 const authRouter = require('./routes/auth.router')
 const emailRouter = require('./routes/email.router')
 

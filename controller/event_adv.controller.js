@@ -7,10 +7,12 @@ class evAdvController {
         const sql = await db.query(
             `INSERT INTO public.event_advs(
             name, description, count_member, time_end, img, id_type, id_tag, id_user_add)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`, 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+            RETURNING id`, 
             [name, description, count_member, time_end, img, id_type, id_tag, id_user_add]
-        )
-        res.json('ok')
+        )    
+
+        return res.json(sql.rows[0])
     }
     async get_evAdvs(req, res) {
         const sql = await db.query(

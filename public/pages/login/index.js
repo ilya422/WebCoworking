@@ -73,7 +73,7 @@ async function forget_password() {
         })
         json_data = await response.json();
         if (json_data.message == "Пользователь найден") {
-            url_code = JSON.stringify(json_data.token).replace(/\"/g, "")
+            url_code = JSON.stringify(json_data.tokenRecovery).replace(/\"/g, "")
             url += '/recovery_pass/' + url_code
         }
         else {

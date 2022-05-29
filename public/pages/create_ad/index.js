@@ -1,3 +1,6 @@
+// const EmailController = require("../../../controller/email.controller");
+// const { getSubByTag } = require("../../../controller/user_sub_evtags.controller");
+
 window.onload = load_page()
 function load_page() {
     getProfileImage();
@@ -64,9 +67,9 @@ async function create_serAdv() {
 
     let success_info = document.getElementById("success_info")
     let img_split = img.split("/")
-    if (name == '' || description == '' || img_split[img_split.length-1] == 'image_add.png' || type == '0' || tag == '0') {
+    if (name == '' || description == '' || img_split[img_split.length - 1] == 'image_add.png' || type == '0' || tag == '0') {
         success_info.innerHTML = `Заполните все поля!`
-        success_info.style.display='flex'
+        success_info.style.display = 'flex'
         return
     }
 
@@ -83,7 +86,7 @@ async function create_serAdv() {
     try {
         document.getElementById("create_btn").remove()
         success_info.innerHTML = `Объявление успешно создано!`
-        success_info.style.display='flex'
+        success_info.style.display = 'flex'
         let response = await fetch('/api/service_adv', {
             method: 'POST',
             headers: {
@@ -97,7 +100,7 @@ async function create_serAdv() {
     }
     catch {
         success_info.innerHTML = `Неизвестная ошибка!`
-        success_info.style.display='flex'
+        success_info.style.display = 'flex'
         console.log(e)
     }
 }
@@ -109,15 +112,16 @@ async function create_evAdv() {
     let time_end = document.getElementById('time_end').value
     let img = document.getElementById('form-img').src
     let type = document.getElementById('form-type').value
-    let tag = document.getElementById('tag').selectedIndex
+    let tag_selecter = document.getElementById('tag')
+    var tag = tag_selecter.options[tag_selecter.selectedIndex].value;
 
 
     let success_info = document.getElementById("success_info")
     let img_split = img.split("/")
     if (name == '' || description == '' || count_member == '0' || time_end == '' ||
-            img_split[img_split.length-1] == 'image_add.png' || type == '0' || tag == '0') {
+        img_split[img_split.length - 1] == 'image_add.png' || type == '0' || tag == '0') {
         success_info.innerHTML = `Заполните все поля!`
-        success_info.style.display='flex'
+        success_info.style.display = 'flex'
         return
     }
 
@@ -136,22 +140,53 @@ async function create_evAdv() {
     try {
         document.getElementById("create_btn").remove()
         success_info.innerHTML = `Объявление успешно создано!`
-        success_info.style.display='flex'
+        success_info.style.display = 'flex'
         let response = await fetch('/api/event_adv', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(body_json)
-        }).then(
+        })
+
+        if (response.ok) {
+            json_data = await response.json();
+            sendMainForSubEvTag(tag, json_data.id),
             setTimeout(function () {
                 window.location.href = '/';
-            }, 1000));
+            }, 10000)
+        };
     }
-    catch(e) {
+    catch (e) {
         success_info.innerHTML = `Неизвестная ошибка!`
-        success_info.style.display='flex'
+        success_info.style.display = 'flex'
         console.log(e);
+    }
+}
+
+async function sendMainForSubEvTag(id_tag, id_ev) {
+    let response = await fetch(`/api/sub_events_tag/${id_tag}`);
+    if (response.ok) {
+        users = await response.json();
+        let url = window.location.href;
+        ev_url = 'http://' + url.split('/')[2] + "/event/" + id_ev 
+        let body_json_send = {
+            "users": users,
+            "url": ev_url
+        }
+
+        console.log(body_json_send)
+
+        fetch('/api/email/list', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(body_json_send)
+        })
+    } else {
+        console.log('error', response.status);
+        return
     }
 }
 
@@ -200,7 +235,7 @@ function viewEventFrom() {
                     <a class="title"><b>Количество требуемых помощников:</b></a><br>
                     <input class="form-name" id="count_mem" min="0" type="number" value="0"><br>
                     <a class="title"><b>Дата окончания набора:</b></a><br>
-                    <input class="form-name" id="time_end" type="date"><br>
+                    <input class="form-name" id="time_end" type="date" min="${new Date().toISOString().slice(0, 10)}"><br>
                     <div class="btn">
                         <div id="success_info" style="display: none"></div><br>
                         <a class="button" id="create_btn" onclick="create_evAdv()">Создать</a>
