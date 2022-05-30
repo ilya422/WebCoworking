@@ -1,7 +1,8 @@
 const Router = require('express')
 const router = new Router()
 const path = require('path');
-const authMiddleware = require('../middleware/auth.middleware')
+const authMiddleware = require('../middleware/auth.middleware');
+const recovery_passMiddleware = require('../middleware/recovery_pass.middleware');
 
 router.use('/',
     Router.static(path.resolve('public/pages/main')))
@@ -39,7 +40,7 @@ router.use('/login',
 router.use('/registration',
     Router.static(path.resolve('public/pages/registration')))
 
-router.use('/recovery_pass/:token',
+router.use('/recovery_pass/:token', recovery_passMiddleware,
     Router.static(path.resolve('public/pages/recovery_pass')))
 
 router.route('/public/content/img/*')

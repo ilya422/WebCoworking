@@ -71,8 +71,12 @@ body {
     font-weight: 600;
     font-family: 'Open Sans', sans-serif;
     border-radius: 30px;
-
     transition: background-color 0.2s linear;
+}
+
+input[type="submit"]{
+    font-size: 15px;
+    border: 0px;
 }
 
 .button:hover {
@@ -260,7 +264,7 @@ input[type="file"]{
     }
 
     .cart-img{
-        width: 80px;
+        height: 80px;
     }
 
     .service-form {
@@ -287,10 +291,5 @@ input[type="file"]{
 
     .service-name{
         width: 90%;
-    }
-
-    input[type="submit"]{
-        font-size: 15px;
-        border: 0px;
     }
 }

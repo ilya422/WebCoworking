@@ -70,7 +70,7 @@ async function create_serAdv() {
         return
     }
 
-    new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
+    let new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
     let body_json = {
         "name": name,
         "description": new_description,
@@ -122,7 +122,7 @@ async function create_evAdv() {
         return
     }
 
-    new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
+    let new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
 
     let body_json = {
         "name": name,
@@ -148,7 +148,7 @@ async function create_evAdv() {
 
         if (response.ok) {
             json_data = await response.json();
-            sendMainForSubEvTag(tag, json_data.id),
+            sendMainForSubEvTag(name, tag, json_data.id),
             setTimeout(function () {
                 window.location.href = '/';
             }, 1000)
@@ -161,13 +161,14 @@ async function create_evAdv() {
     }
 }
 
-async function sendMainForSubEvTag(id_tag, id_ev) {
+async function sendMainForSubEvTag(name, id_tag, id_ev) {
     let response = await fetch(`/api/sub_events_tag/${id_tag}`);
     if (response.ok) {
         users = await response.json();
         let url = window.location.href;
         ev_url = 'http://' + url.split('/')[2] + "/event/" + id_ev 
         let body_json_send = {
+            "name": name,
             "users": users,
             "url": ev_url
         }
@@ -216,6 +217,14 @@ function showIMG(input) {
 }
 
 function viewEventFrom() {
+    const options = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+    }
+    const date = new Date()
+    date.setDate(date.getDate() + 1)
+    const tomorrow = date.toLocaleString("ru", options).split('.').reverse().join('-')
     document.getElementById('view_form').innerHTML = `
             <div id="create_event" style='display: flex;'>
                 <div class="answer">
@@ -230,7 +239,7 @@ function viewEventFrom() {
                     <a class="title"><b>Количество требуемых помощников:</b></a><br>
                     <input class="form-name" id="count_mem" min="0" type="number" value="0"><br>
                     <a class="title"><b>Дата окончания набора:</b></a><br>
-                    <input class="form-name" id="time_end" type="date" min="${new Date().toISOString().slice(0, 10)}"><br>
+                    <input class="form-name" id="time_end" type="date" min="${tomorrow}"><br>
                     <div class="btn">
                         <div id="success_info" style="display: none"></div><br>
                         <a class="button" id="create_btn" onclick="create_evAdv()">Создать</a>

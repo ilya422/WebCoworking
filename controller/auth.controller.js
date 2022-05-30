@@ -1,18 +1,27 @@
 const userController = require('./user.controller')
 const tokensController = require('./tokens.controller') 
+const RegCodeController = require('./registration_codes.controller')
 const bcrypt = require('bcryptjs')
 
 class AuthController {
     async registration(req, res) {
         try {
-            const { first_name, last_name, email, password } = req.body
-            const candidate = await userController.findOneUserByEmail({ email });
-            if (candidate.length != 0) {
-                return res.status(400).json({ message: "Пользователь существует" })
+            const { first_name, last_name, email, password, code } = req.body
+            let regCode = await RegCodeController.getCode(email)
+            var CurrentTime = new Date();
+            if (regCode[0].time_end <= CurrentTime) {
+                RegCodeController.deleteCode(email)
+                return res.json({ message: "Время кода истекло" })
             }
+
+            const validCode = bcrypt.compareSync(code, regCode[0].code)
+            if (!validCode){
+                return res.json({ message: "Неверный код" })
+            }
+            RegCodeController.deleteCode(email)
             const hashPassword = bcrypt.hashSync(password, 7)
             await userController.createUserFromReg({ first_name, last_name, email, hashPassword })
-            return res.json({ message: "Пользователь успешно зарегестрирован" })
+            return res.json({ message: "Пользователь успешно создан" })
         } catch (e) {
             console.log(e)
             return res.status(400).json({ message: 'Ошибка при регистрации' })

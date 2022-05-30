@@ -11,6 +11,7 @@ const typeRouter = require('./routes/type.router')
 const tagRouter = require('./routes/tag.router')
 const userSubTagsRouter = require('./routes/user_sub_evtags.router')
 const authRouter = require('./routes/auth.router')
+const regCodeRouter = require('./routes/registration_codes.router')
 const emailRouter = require('./routes/email.router')
 
 app.use(express.json({limit: '50mb'}));
@@ -25,6 +26,7 @@ app.use(typeRouter)
 app.use(tagRouter)
 app.use(userSubTagsRouter)
 app.use(authRouter)
+app.use(regCodeRouter)
 app.use(emailRouter)
 
 var nowTime = new Date();

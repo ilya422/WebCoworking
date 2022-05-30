@@ -9,12 +9,13 @@ module.exports = function (req, res, next) {
     try {
         const token = req.params.token;
         if (!token) {
-            return res.json({message: "Токен не найден"});
+            res.json({message: "Токен не найден"})
+            return res.redirect('/login');;
         }
         const decodedData = jwt.verify(token, secret)
         req.user = decodedData
         next()
     } catch (e) {
-        return res.json({e});
+        return res.redirect('/login');;
     }
 }

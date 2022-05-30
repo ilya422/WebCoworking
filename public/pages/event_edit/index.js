@@ -66,7 +66,16 @@ async function getAdv() {
         var date = json_data.time_end.split('-')
         date = date[2] + "-" + date[1] + "-" + date[0]
         document.querySelector('.event-date').value = date
-        document.querySelector('.event-date').setAttribute('min', new Date().toISOString().slice(0, 10))
+
+        const options = {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+        }
+        const min_date = new Date()
+        min_date.setDate(min_date.getDate() + 1)
+        const tomorrow = min_date.toLocaleString("ru", options).split('.').reverse().join('-')
+        document.querySelector('.event-date').setAttribute('min', tomorrow)
     } else {
         console.log('error', response.status);
     }

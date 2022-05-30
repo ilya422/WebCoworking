@@ -44,10 +44,11 @@ class EmailController {
     async SendEmailingList(req, res) {
         const users_list = req.body.users
         const url = req.body.url
+        const ad_name = req.body.name
         for (var u in users_list) {
             var u = users_list[u];
-            let name = "Новое мероприятие по вашей подписке"
-            let message = `Тег: ${u.tag_name}\nСсылка на мероприятие:\n${url}`
+            let name = "Новое мероприятие по подписке на тег"
+            let message = `Объявление: ${ad_name}\nТег: ${u.tag_name}\nСсылка на мероприятие:\n${url}`
             let to = u.email
             setTimeout(function () {
                 Send(res, name, message, to);
