@@ -54,8 +54,10 @@ async function deleteOld() {
     try{
         const {delete_evAdv_ByTime} = require('./controller/event_adv.controller')
         const {deleteOldTokens} = require('./controller/tokens.controller')
+        const {deleteOldRegCode} = require('./controller/registration_codes.controller')
         await delete_evAdv_ByTime(nowTime)
         await deleteOldTokens(nowTime)
+        await deleteOldRegCode(nowTime)
         console.log(`След. очистка старых данных через ${parseInt(tomorrowTime - nowTime) / 1000 / 3600} часа`)
     }
     catch(e) {

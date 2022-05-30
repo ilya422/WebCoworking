@@ -40,6 +40,14 @@ class RegCodeController {
         )
         return
     }
+
+    async deleteOldRegCode(time) {
+        const sql = await db.query(
+            `DELETE FROM public.registration_codes
+            WHERE time_end = $1`, [time]
+        )
+        return
+    }
 }
 
 module.exports = new RegCodeController()
