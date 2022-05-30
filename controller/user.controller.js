@@ -76,19 +76,19 @@ class UserController {
     }
 
     async updateUser(req, res) {
-        const {first_name, last_name, email, img} = req.body
+        const {first_name, last_name, img} = req.body
         const id = req.user.id
         const sql = await db.query(
             `UPDATE public.users
-            SET first_name=$1, last_name=$2, email=$3, img=$4
-            WHERE id = $5`, [first_name, last_name, email, img, id]
+            SET first_name=$1, last_name=$2, img=$3
+            WHERE id = $4`, [first_name, last_name, img, id]
         )
         res.json('ok')
     }
 
     async updateUserWithPassword(req, res) {
         const id = req.user.id
-        const {first_name, last_name, email, img} = req.body
+        const {first_name, last_name, img} = req.body
         const old_password = req.body.old_password
         const new_password = req.body.new_password
 
@@ -106,8 +106,8 @@ class UserController {
             const hashPassword = bcrypt.hashSync(new_password, 7)
             const sql_update = await db.query(
                 `UPDATE public.users
-                SET first_name=$1, last_name=$2, email=$3, img=$4, password = $5
-                WHERE id = $6`, [first_name, last_name, email, img, hashPassword, id]
+                SET first_name=$1, last_name=$2, img=$3, password = $4
+                WHERE id = $5`, [first_name, last_name, img, hashPassword, id]
             )
             return res.json({ message: 'ok'})
         }

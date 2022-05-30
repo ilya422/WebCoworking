@@ -12,7 +12,7 @@ async function getUser() {
 
         document.getElementById('first_name').value = json_data.first_name
         document.getElementById('last_name').value = json_data.last_name
-        document.getElementById('email').value = json_data.email
+        document.getElementById('email').innerHTML = json_data.email
         document.getElementById('role').innerHTML = json_data.role
         document.getElementById('img').src = json_data.img
 
@@ -21,12 +21,11 @@ async function getUser() {
     }
 }
 
-async function NormalUpdate(first_name, last_name, email, img) {
+async function NormalUpdate(first_name, last_name, img) {
     let success_info = document.getElementById("success_info")
     let body_json = {
         "first_name": first_name,
         "last_name": last_name,
-        "email": email,
         "img": img
     }
 
@@ -49,13 +48,12 @@ async function NormalUpdate(first_name, last_name, email, img) {
     }
 }
 
-async function UpdateWithPassword(first_name, last_name, email, img, old_pass, new_pass_repeat) {
+async function UpdateWithPassword(first_name, last_name, img, old_pass, new_pass_repeat) {
     let success_info = document.getElementById("success_info")
 
     let body_json = {
         "first_name": first_name,
         "last_name": last_name,
-        "email": email,
         "img": img,
         "old_password": old_pass,
         "new_password": new_pass_repeat
@@ -88,22 +86,22 @@ async function UpdateWithPassword(first_name, last_name, email, img, old_pass, n
 function update_User() {
     let first_name = document.getElementById('first_name').value
     let last_name = document.getElementById('last_name').value
-    let email = document.getElementById('email').value
+    // let email = document.getElementById('email').value
     let img = document.getElementById('img').src
 
     let success_info = document.getElementById("success_info")
     success_info.style.display = 'none'
-    if (first_name == '' || last_name == '' || email == '' || img == '') {
+    if (first_name == '' || last_name == ''|| img == '') {
         success_info.innerHTML = `Заполните все поля!`
         success_info.style.display = 'flex'
         return
     }
 
-    if (email.split("@")[1] != "study.utmn.ru") {
-        success_info.innerHTML = "Email должен содержать @study.utmn.ru"
-        success_info.style.display='flex'
-        return
-    }
+    // if (email.split("@")[1] != "study.utmn.ru") {
+    //     success_info.innerHTML = "Email должен содержать @study.utmn.ru"
+    //     success_info.style.display='flex'
+    //     return
+    // }
     
     let old_pass  = document.getElementById('old_pass').value
     let new_pass  = document.getElementById('new_pass').value
@@ -112,7 +110,7 @@ function update_User() {
     if (old_pass != '' || new_pass != '' || new_pass_repeat != '') {
         if (old_pass != '' && new_pass != '' && new_pass_repeat != '') {
             if (new_pass == new_pass_repeat) {
-                UpdateWithPassword(first_name, last_name, email, img, old_pass, new_pass_repeat)
+                UpdateWithPassword(first_name, last_name, img, old_pass, new_pass_repeat)
                 return
             }
             else {
@@ -128,7 +126,7 @@ function update_User() {
         }
     }
     else {
-        NormalUpdate(first_name, last_name, email, img)
+        NormalUpdate(first_name, last_name, img)
         return
     }
 }
