@@ -60,7 +60,8 @@ async function create_serAdv() {
     let price = document.getElementById('price').value
     let img = document.getElementById('form-img').src
     let type = document.getElementById('form-type').value
-    let tag = document.getElementById('tag').selectedIndex
+    let tag_selecter = document.getElementById('tag')
+    var tag = tag_selecter.options[tag_selecter.selectedIndex].value;
 
     let success_info = document.getElementById("success_info")
     let img_split = img.split("/")
