@@ -6,6 +6,7 @@ const extendedRoleMiddlewate = require('../middleware/extended_role.middleware')
 
 router.post('/api/event_adv', authMiddleware, extendedRoleMiddlewate, evAdvController.create_evAdv)
 router.get('/api/event_adv', evAdvController.get_evAdvsForMain)
+router.get('/api/event_adv/main/:id_tag', evAdvController.get_evAdvByTag)
 router.get('/api/event_adv/:id', evAdvController.getOne_evAdv)
 router.get('/api/event_adv/user/p', authMiddleware, evAdvController.get_evAdvByUser)
 router.put('/api/event_adv/:id', authMiddleware, extendedRoleMiddlewate, evAdvController.update_evAdv)

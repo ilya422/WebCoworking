@@ -121,7 +121,7 @@ body {
     text-align: center;
 }
 
-.type, .category{
+.type, .tag{
     height: 35px;
     width: 200px;
     font-size: 20px;
@@ -340,7 +340,7 @@ body {
     }
 
     .cart-img{
-        width: 80px;
+        height: 80px;
     }
 
     .header-title{
@@ -367,11 +367,11 @@ body {
     .btn {
         margin-right: 0px;
     }
-/*Если делать и для категорий то юзай это иначе не надо
-    .type, .category{
+
+    .type, .tag{
         height: 30px;
         width: 180px;
         font-size: 17px;
     }
-*/
+
 }

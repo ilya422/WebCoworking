@@ -1,8 +1,8 @@
 let id_event_adv_for_unsub = 0;
 window.onload = load_page()
 function load_page() {
-    getProfileImage();
     getYourEvents();
+    getProfileImage();
 }
 
 async function getProfileImage() {

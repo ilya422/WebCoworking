@@ -248,7 +248,7 @@ body {
 
     .nav-item {
         padding: 10px 0px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
     }
 
@@ -294,6 +294,14 @@ body {
 
     .b-popup .b-popup-content{
         margin: 40% auto;
+    }
+
+    .site-logo{
+        width: 60px;
+    }
+
+    .cart-img{
+        width: 80px;
     }
 
 }

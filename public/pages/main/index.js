@@ -1,8 +1,11 @@
+let select_tag = 0;
+let select_type = '';
 window.onload = load_page()
 function load_page() {
-    getProfileImage();
-    getTypes();
     getAllAdv();
+    getProfileImage();
+    getTags();
+    getTypes();
 }
 
 async function getProfileImage() {
@@ -12,22 +15,42 @@ async function getProfileImage() {
             json_data = await response.json();
             img = document.getElementById('profile_img');
             img.src = json_data[0].img;
-    
+
         } else {
             console.log('error', response.status);
         }
     }
-    catch {}
+    catch { }
+}
+
+async function getTags() {
+    let response = await fetch('/api/tag');
+    if (response.ok) {
+        selector_tag = document.getElementById('tag_choice');
+        json_data_tag = await response.json();
+        for (var i in json_data_tag) {
+            var tag = json_data_tag[i];
+            var option = document.createElement("option");
+            option.setAttribute("value", tag.id);
+            option.innerHTML = tag.name;
+            selector_tag.appendChild(option);
+        }
+    } else {
+        console.log('error', response.status);
+    }
 }
 
 async function getTypes() {
     let response = await fetch('/api/type');
     if (response.ok) {
-        div = document.getElementById('type_choice');
-        json_data = await response.json();
-        for (var i in json_data) {
-            var v = json_data[i];
-            div.innerHTML += `<option value="${v.id}">${v.name}</option>`;
+        selector_type = document.getElementById('type_choice');
+        json_data_type = await response.json();
+        for (var i in json_data_type) {
+            var type = json_data_type[i];
+            var option = document.createElement("option");
+            option.setAttribute("value", type.id);
+            option.innerHTML = type.name;
+            selector_type.appendChild(option);
         }
     } else {
         console.log('error', response.status);
@@ -35,16 +58,25 @@ async function getTypes() {
 }
 
 async function getAllAdv() {
-    response_ev = await fetch('/api/event_adv');
-    response_ser = await fetch('/api/service_adv');
+    let response_ev;
+    let response_ser;
+    if (select_tag == 0) {
+        response_ev = await fetch('/api/event_adv');
+        response_ser = await fetch('/api/service_adv');
+    }
+    else {
+        response_ev = await fetch(`/api/event_adv/main/${select_tag}`);
+        response_ser = await fetch(`/api/service_adv/main/${select_tag}`);
+    }
+
 
     if (response_ev.ok && response_ser.ok) {
-        div = document.querySelector('.cards-holder');
+        let div = document.querySelector('.cards-holder');
         div.innerHTML = '';
 
-        json_data_ev = await response_ev.json();
-        json_data_ser = await response_ser.json();
-        json_data = [...json_data_ev, ...json_data_ser];
+        let json_data_ev = await response_ev.json();
+        let json_data_ser = await response_ser.json();
+        let json_data = [...json_data_ev, ...json_data_ser];
         json_data.sort(function (a, b) {
             var dateA = new Date(a.time_add), dateB = new Date(b.time_add)
             return dateB - dateA
@@ -65,13 +97,19 @@ async function getAllAdv() {
 }
 
 async function getEventAdv() {
-    response_ev = await fetch('/api/event_adv');
+    let response_ev;
+    if (select_tag == 0) {
+        response_ev = await fetch('/api/event_adv/');
+    }
+    else {
+        response_ev = await fetch(`/api/event_adv/main/${select_tag}`);
+    }
 
     if (response_ev.ok) {
-        div = document.querySelector('.cards-holder');
+        let div = document.querySelector('.cards-holder');
         div.innerHTML = '';
 
-        json_data = await response_ev.json();
+        let json_data = await response_ev.json();
         json_data.sort(function (a, b) {
             var dateA = new Date(a.time_sort), dateB = new Date(b.time_sort)
             return dateA - dateB
@@ -86,13 +124,19 @@ async function getEventAdv() {
 }
 
 async function getServiceAdv() {
-    response_ser = await fetch('/api/service_adv');
+    let response_ser;
+    if (select_tag == 0) {
+        response_ser = await fetch('/api/service_adv');
+    }
+    else {
+        response_ser = await fetch(`/api/service_adv/main/${select_tag}`);
+    }
 
     if (response_ser.ok) {
-        div = document.querySelector('.cards-holder');
+        let div = document.querySelector('.cards-holder');
         div.innerHTML = '';
 
-        json_data = await response_ser.json();
+        let json_data = await response_ser.json();
         json_data.sort(function (a, b) {
             var dateA = new Date(a.time_add), dateB = new Date(b.time_add)
             return dateB - dateA
@@ -106,16 +150,27 @@ async function getServiceAdv() {
     }
 }
 
-function selected_type(a) {
-    var label = a.options[a.selectedIndex].text;
-    if (label == 'Все') {
-        getAllAdv();
-    } else if (label == 'Мероприятие') {
-        getEventAdv();
-    } else if (label == 'Услуга') {
-        getServiceAdv();
-    }
 
+function selected_check() {
+    if (select_type == "Мероприятие") {
+        getEventAdv()
+    }
+    else if (select_type == "Услуга") {
+        getServiceAdv()
+    }
+    else {
+        getAllAdv()
+    }
+}
+
+function selected_type(a) {
+    select_type = a.options[a.selectedIndex].text;
+    selected_check()
+}
+
+function selected_tag(a) {
+    select_tag = a.options[a.selectedIndex].value;
+    selected_check()
 }
 
 

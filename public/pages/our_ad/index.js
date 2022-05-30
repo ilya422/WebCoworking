@@ -1,8 +1,8 @@
 let adv_for_del = []
 window.onload = load_page()
 function load_page() {
-    getProfileImage();
     getAllAdv();
+    getProfileImage();
 }
 
 async function getProfileImage() {

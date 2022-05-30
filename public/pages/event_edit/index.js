@@ -2,9 +2,9 @@ let getURL = window.location.href.split("/")
 id_adv = getURL[getURL.length - 2]
 window.onload = load_page()
 function load_page() {
+    getAdv();
     getProfileImage();
     getTags();
-    getAdv();
 }
 
 async function checkUser(user_id, role) {

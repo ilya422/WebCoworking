@@ -1,7 +1,7 @@
 window.onload = load_page()
 function load_page() {
-    getUser();;
     getUserSubEvTag();
+    getUser();
 }
 
 async function getUser() {
@@ -27,7 +27,7 @@ async function getTags() {
     let response = await fetch('/api/tag');
     if (response.ok) {
         let selector = document.getElementById('tag_choice');
-        selector.innerHTML = `<option value="0"></option>`
+        selector.innerHTML = `<option value="0">Не выбран</option>`
         let json_data = await response.json();
         for (var i in json_data) {
             var v = json_data[i];
@@ -87,7 +87,7 @@ async function logoutAll() {
         setTimeout(function () {
             location.reload();
         }, 1000))
-}
+}   
 
 async function selected_tag(a) {
     var label = a.options[a.selectedIndex].value;

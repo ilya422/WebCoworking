@@ -263,4 +263,34 @@ input[type="file"]{
         padding: 0px 20px;
         font-size: 17px;
     }
+
+    .site-logo{
+        width: 60px;
+    }
+
+    .cart-img{
+        width: 80px;
+    }
+
+    .service-form {
+        width: 80%;
+    }
+
+    .service-text {
+        padding: 0px 20px;
+        font-size: 17px;
+    }
+
+    .service-description{
+        width: 100%;
+    }
+
+    .service-name{
+        width: 90%;
+    }
+
+    input[type="submit"]{
+        font-size: 15px;
+        border: 0px;
+    }
 }

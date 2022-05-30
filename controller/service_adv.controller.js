@@ -27,6 +27,20 @@ class serAdvController {
         )
         res.json(sql.rows)
     }
+    async get_serAdvByTag(req, res) {
+        const id_tag = req.params.id_tag
+        const sql = await db.query(
+            `SELECT ser.id, ser.name, ser.description,
+            ser.price,
+            ser.img, ty.name as type, tg.id as id_tag, tg.name as tag, ser.id_user_add, ser.time_add
+            FROM public.service_advs as ser
+            JOIN types as ty ON ser.id_type = ty.id
+            JOIN tags as tg ON ser.id_tag = tg.id
+            WHERE tg.id = $1`, [id_tag]
+        )
+        res.json(sql.rows)
+    }
+
     async get_serAdvByUser(req, res) {
         const id_user = req.user.id
         const sql = await db.query(

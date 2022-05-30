@@ -228,7 +228,7 @@ input[type="file"]{
 
     .nav-item {
         padding: 10px 0px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
     }
 
@@ -255,6 +255,14 @@ input[type="file"]{
         margin-right: 0px;
     }
 
+    .site-logo{
+        width: 60px;
+    }
+
+    .cart-img{
+        width: 80px;
+    }
+
     .service-form {
         width: 70%;
     }
@@ -262,5 +270,27 @@ input[type="file"]{
     .service-text {
         padding: 0px 20px;
         font-size: 17px;
+    }
+
+    .service-form {
+        width: 80%;
+    }
+
+    .service-text {
+        padding: 0px 20px;
+        font-size: 17px;
+    }
+
+    .service-description{
+        width: 100%;
+    }
+
+    .service-name{
+        width: 90%;
+    }
+
+    input[type="submit"]{
+        font-size: 15px;
+        border: 0px;
     }
 }
