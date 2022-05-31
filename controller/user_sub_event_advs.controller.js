@@ -24,7 +24,7 @@ class UserSubEventsController {
     async getSubs(req, res) {
         const sql = await db.query(
             `SELECT id_user, id_event_adv
-            FROM public.user_sub_event_advs;`
+            FROM public.user_sub_event_advs`
         )
         res.json(sql.rows)
     }
@@ -39,10 +39,11 @@ class UserSubEventsController {
         res.json(sql.rows)
     }
     async getSubByEvent(req, res) {
-        const id = req.params.id
+        const id = req.params.id_event_adv
         const sql = await db.query(
-            `SELECT id_user, id_event_adv
+            `SELECT id_user, u.email, id_event_adv
             FROM public.user_sub_event_advs
+            JOIN public.users as u ON id_user = u.id
             WHERE id_event_adv = $1`, [id]
         )
         res.json(sql.rows)

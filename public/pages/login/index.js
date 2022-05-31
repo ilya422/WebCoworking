@@ -74,6 +74,9 @@ async function forget_password() {
         })
         json_data = await response.json();
         if (json_data.message == "Пользователь найден") {
+            info_div.innerHTML = "Сообщение отправлено на почту"
+            info_div.style.backgroundColor = 'RGB(128, 128, 128)'
+            info_div.style.display='flex'
             url_code = JSON.stringify(json_data.tokenRecovery).replace(/\"/g, "")
             url += '/recovery_pass/' + url_code
         }

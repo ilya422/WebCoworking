@@ -4,7 +4,8 @@ const UserSubEventsController = require('../controller/user_sub_event_advs.contr
 const authMiddleware = require('../middleware/auth.middleware')
 
 router.post('/api/sub_events', authMiddleware, UserSubEventsController.createSub)
-router.get('/api/sub_events/user', authMiddleware, UserSubEventsController.getSubByUser)
+router.get('/api/sub_events/:id_event_adv', authMiddleware, UserSubEventsController.getSubByEvent)
+router.get('/api/sub_events/user/sub', authMiddleware, UserSubEventsController.getSubByUser)
 router.get('/api/sub_events/user_adv/:id_event_adv', authMiddleware, UserSubEventsController.getSubByUserEvent)
 // router.get('/api/sub_events/adv/:id', authMiddleware, UserSubEventsController.getSubByEvent)
 router.delete('/api/sub_events', authMiddleware, UserSubEventsController.deleteSubByUserEvent)

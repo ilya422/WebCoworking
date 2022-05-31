@@ -21,8 +21,7 @@ async function getProfileImage() {
 }
 
 async function getYourEvents() {
-    response_ev = await fetch('/api/sub_events/user');
-
+    let response_ev = await fetch(`/api/sub_events/user/sub`);
     if (response_ev.ok) {
         div = document.querySelector('.card-event');
         div.innerHTML = '';
@@ -46,15 +45,15 @@ async function respond(id_event_adv) {
             "id_event_adv": id_event_adv
         }
 
-        let response_sub = await fetch('/api/event_adv', {
+        let response_sub = await fetch('/api/sub_events', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(body_json_sub)
-        })
-        await response_sub.json();
-        location.reload()
+        }).then(
+            location.reload()
+        )
 }
 
 function open_modal(v) {
