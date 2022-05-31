@@ -203,7 +203,7 @@ function showIMG(input) {
             var canvas = document.createElement('canvas');
             canvas.width = 256; canvas.height = 256;
             var context = canvas.getContext('2d');
-            context.drawImage(imageLocalFull, 0, 0, 256, 256);
+            context.drawImage(imageLocalFull, 0, 0, 256, 256 * imageLocalFull.height / imageLocalFull.width);
             var imageUrlIcon = canvas.toDataURL(file.type);
 
             var imageLocalIcon = new Image();
@@ -229,17 +229,17 @@ function viewEventFrom() {
     document.getElementById('view_form').innerHTML = `
             <div id="create_event" style='display: flex;'>
                 <div class="answer">
-                    <a class="title"><b>Название мероприятия:</b></a><br>
-                    <input class="form-name" id="name" type="text" size="30"><br>
-                    <a class="title"><b>Описание мероприятия:</b></a><br>
-                    <textarea class="form-desc" id="desc"></textarea><br>
-                    <a class="title"><b>Тег:</b></a><br>
+                    <a class="title"><b>Название мероприятия:</b></a>
+                    <input class="form-name" id="name" type="text" size="30">
+                    <a class="title"><b>Описание мероприятия:</b></a>
+                    <textarea class="form-desc" id="desc"></textarea>
+                    <a class="title"><b>Тег:</b></a>
                     <select class="form-name" id="tag">
                         <option value="0"></option>
-                    </select><br>
-                    <a class="title"><b>Количество требуемых помощников:</b></a><br>
-                    <input class="form-name" id="count_mem" min="0" type="number" value="0"><br>
-                    <a class="title"><b>Дата окончания набора:</b></a><br>
+                    </select>
+                    <a class="title"><b>Количество требуемых помощников:</b></a>
+                    <input class="form-name" id="count_mem" min="0" type="number" value="0">
+                    <a class="title"><b>Дата окончания набора:</b></a>
                     <input class="form-name" id="time_end" type="date" min="${tomorrow}"><br>
                     <div class="btn">
                         <div id="success_info" style="display: none"></div><br>
@@ -260,15 +260,15 @@ function viewServiceFrom() {
     document.getElementById('view_form').innerHTML = `
             <div id="create_service" style='display: flex;'>
                 <div class="answer">
-                    <a class="title"><b>Название услуги:</b></a><br>
-                    <input class="form-name" id="name" type="text" size="30" value=""><br>
-                    <a class="title"><b>Описание услуги:</b></a><br>
-                    <textarea class="form-desc" id="desc" value=""></textarea><br>
-                    <a class="title"><b>Тег:</b></a><br>
+                    <a class="title"><b>Название услуги:</b></a>
+                    <input class="form-name" id="name" type="text" size="30" value="">
+                    <a class="title"><b>Описание услуги:</b></a>
+                    <textarea class="form-desc" id="desc" value=""></textarea>
+                    <a class="title"><b>Тег:</b></a>
                     <select class="form-name" id="tag">
                         <option value="0"></option>
-                    </select><br>
-                    <a class="title"><b>Стоимость (руб.):</b></a><br>
+                    </select>
+                    <a class="title"><b>Стоимость (руб.):</b></a>
                     <input class="form-name" id="price" min="0" type="number" value="0"><br>
                     <div class="btn">
                     <div id="success_info" style="display: none"></div><br>

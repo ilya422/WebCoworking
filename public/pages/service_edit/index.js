@@ -85,7 +85,8 @@ function showIMG(input) {
             var canvas = document.createElement('canvas');
             canvas.width = 256; canvas.height = 256;
             var context = canvas.getContext('2d');
-            context.drawImage(imageLocalFull, 0, 0, 256, 256);
+
+            context.drawImage(imageLocalFull, 0, 0, 256, 256 * imageLocalFull.height / imageLocalFull.width);
             var imageUrlIcon = canvas.toDataURL(file.type);
 
             var imageLocalIcon = new Image();

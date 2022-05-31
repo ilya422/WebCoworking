@@ -77,7 +77,7 @@ input[type='text']
     background-color: rgb(255, 177, 177);
     padding: 11px 13px;
     width: 60%;
-    text-align: center;
+    justify-content: center;
 }
 
 .attention-code{

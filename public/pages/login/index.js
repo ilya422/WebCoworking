@@ -26,7 +26,7 @@ async function login() {
         json_data = await response.json();
         if (json_data.message == "Вход выполнен успешно") {
             info_div.innerHTML = json_data.message
-            info_div.style.backgroundColor = 'RGB(152,251,74)'
+            info_div.style.backgroundColor = 'RGB(178,252,121)'
             info_div.style.display='flex'
             setTimeout(function () {
                 window.location.href = '/';

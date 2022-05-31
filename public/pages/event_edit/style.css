@@ -145,14 +145,12 @@ input[type="number"]{
     align-items: center;
 }
 
-.event-img{
-    height: 200px;
-}
 
 input[type="file"]{
     width: 150px;
     margin-top: 5px;
 }
+
 
 @media (max-width: 1200px) {
     .container {
@@ -276,20 +274,24 @@ input[type="file"]{
         height: 80px;
     }
 
-    .service-form {
+    .event-form {
         width: 80%;
     }
 
-    .service-text {
+    .event-text {
         padding: 0px 20px;
         font-size: 17px;
     }
 
-    .service-description{
+    .event-description{
         width: 100%;
     }
 
-    .service-name{
+    .event-name{
         width: 90%;
+    }
+
+    .title{
+        text-align: center;
     }
 }

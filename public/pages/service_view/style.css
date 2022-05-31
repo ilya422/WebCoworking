@@ -116,8 +116,9 @@ body {
 
 .service-price {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .price {
@@ -171,6 +172,11 @@ body {
 
     .btns {
         align-items: center;
+    }
+
+    .service-call {
+        flex-direction: column;
+        text-align: center;
     }
 
 }

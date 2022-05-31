@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const {secret} = require('../config')
+const {secretRecovery} = require('../config')
 
 module.exports = function (req, res, next) {
     if (req.meth === "OPTIONS") {
@@ -12,7 +12,7 @@ module.exports = function (req, res, next) {
             res.json({message: "Токен не найден"})
             return res.redirect('/login');;
         }
-        const decodedData = jwt.verify(token, secret)
+        const decodedData = jwt.verify(token, secretRecovery)
         req.user = decodedData
         next()
     } catch (e) {

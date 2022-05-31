@@ -52,8 +52,7 @@ async function getAdv() {
         document.querySelector('.event-tag').innerHTML = "#" + json_data.tag
         document.querySelector('.event-description').innerHTML = json_data.description
         document.getElementById('event-data').innerHTML = json_data.time_end
-        document.querySelector('.event-people').innerHTML = "Количество откликнувшихся: " + 
-        json_data.current_member + " / " + json_data.count_member
+        document.querySelector('.count-people').innerHTML = json_data.current_member + " / " + json_data.count_member
 
         current_member = json_data.current_member;
         count_member = json_data.count_member;
