@@ -97,7 +97,30 @@ function showIMG(input) {
             var canvas = document.createElement('canvas');
             canvas.width = 256; canvas.height = 256;
             var context = canvas.getContext('2d');
-            context.drawImage(imageLocalFull, 0, 0, 256, 256 * imageLocalFull.height / imageLocalFull.width);
+
+            var imgWidth = imageLocalFull.naturalWidth;
+            var screenWidth = canvas.width;
+            var scaleX = 1;
+            if (imgWidth > screenWidth)
+                scaleX = screenWidth / imgWidth;
+            var imgHeight = imageLocalFull.naturalHeight;
+            var screenHeight = canvas.height;
+            var scaleY = 1;
+            if (imgHeight > screenHeight)
+                scaleY = screenHeight / imgHeight;
+            var scale = scaleY;
+            if (scaleX < scaleY)
+                scale = scaleX;
+            if (scale < 1) {
+                imgHeight = imgHeight * scale;
+                imgWidth = imgWidth * scale;
+            }
+
+            canvas.height = imgHeight;
+            canvas.width = imgWidth;
+
+            context.drawImage(imageLocalFull, 0, 0, imageLocalFull.naturalWidth, imageLocalFull.naturalHeight, 0, 0, imgWidth, imgHeight);
+
             var imageUrlIcon = canvas.toDataURL(file.type);
 
             var imageLocalIcon = new Image();
