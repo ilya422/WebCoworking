@@ -238,6 +238,14 @@ body {
     font-size: 18px;
     color:rgb(34, 76, 118);
 }
+
+.no-card {
+    color: rgba(206, 206, 206, 0.571);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 35px;
+    padding-top: 30px;
+}
 /*****************Модальное окно***********************/
 
 .b-popup {

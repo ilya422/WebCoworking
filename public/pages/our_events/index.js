@@ -31,9 +31,13 @@ async function getYourEvents() {
             var dateA = new Date(a.time_sort), dateB = new Date(b.time_sort)
             return dateA - dateB
         });
-        for (var i in json_data) {
-            var v = json_data[i];
-            div.innerHTML += card_event(v)
+        if (json_data.length != 0) {
+            for (var i in json_data) {
+                var v = json_data[i];
+                div.innerHTML += card_event(v)
+            }
+        } else {
+            document.querySelector('.no-card').style.display = 'block'
         }
     } else {
         console.log('error', response_ev.status);
@@ -41,19 +45,19 @@ async function getYourEvents() {
 }
 
 async function respond(id_event_adv) {
-        let body_json_sub = {
-            "id_event_adv": id_event_adv
-        }
+    let body_json_sub = {
+        "id_event_adv": id_event_adv
+    }
 
-        let response_sub = await fetch('/api/sub_events', {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify(body_json_sub)
-        }).then(
-            location.reload()
-        )
+    let response_sub = await fetch('/api/sub_events', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(body_json_sub)
+    }).then(
+        location.reload()
+    )
 }
 
 function open_modal(v) {
