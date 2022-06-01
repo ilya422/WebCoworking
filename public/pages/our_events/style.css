@@ -48,6 +48,8 @@ body {
 
 .cart-img {
     height: 93px;
+    width: 93px;
+    object-fit: cover;
     border-radius: 50%;
 }
 

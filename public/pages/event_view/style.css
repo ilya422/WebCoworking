@@ -49,8 +49,9 @@ body {
 
 .cart-img {
     position: absolute;
-    top: 2px;
     height: 93px;
+    width: 93px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -135,6 +136,12 @@ body {
 
 .people{
     padding-left: 5px;
+}
+
+#event-img{
+    height: 256px;
+    width: 256px;
+    object-fit: cover;
 }
 
 @media (max-width: 1200px) {

@@ -150,9 +150,9 @@ async function create_evAdv() {
         if (response.ok) {
             json_data = await response.json();
             sendMainForSubEvTag(name, tag, json_data.id),
-            setTimeout(function () {
-                window.location.href = '/';
-            }, 1000)
+                setTimeout(function () {
+                    window.location.href = '/';
+                }, 1000)
         };
     }
     catch (e) {
@@ -167,7 +167,7 @@ async function sendMainForSubEvTag(name, id_tag, id_ev) {
     if (response.ok) {
         users = await response.json();
         let url = window.location.href;
-        ev_url = 'http://' + url.split('/')[2] + "/event/" + id_ev 
+        ev_url = 'http://' + url.split('/')[2] + "/event/" + id_ev
         let body_json_send = {
             "name": name,
             "users": users,
@@ -203,7 +203,30 @@ function showIMG(input) {
             var canvas = document.createElement('canvas');
             canvas.width = 256; canvas.height = 256;
             var context = canvas.getContext('2d');
-            context.drawImage(imageLocalFull, 0, 0, 256, 256 * imageLocalFull.height / imageLocalFull.width);
+
+            var imgWidth = imageLocalFull.naturalWidth;
+            var screenWidth = canvas.width;
+            var scaleX = 1;
+            if (imgWidth > screenWidth)
+                scaleX = screenWidth / imgWidth;
+            var imgHeight = imageLocalFull.naturalHeight;
+            var screenHeight = canvas.height;
+            var scaleY = 1;
+            if (imgHeight > screenHeight)
+                scaleY = screenHeight / imgHeight;
+            var scale = scaleY;
+            if (scaleX < scaleY)
+                scale = scaleX;
+            if (scale < 1) {
+                imgHeight = imgHeight * scale;
+                imgWidth = imgWidth * scale;
+            }
+
+            canvas.height = imgHeight;
+            canvas.width = imgWidth;
+
+            context.drawImage(imageLocalFull, 0, 0, imageLocalFull.naturalWidth, imageLocalFull.naturalHeight, 0, 0, imgWidth, imgHeight);
+
             var imageUrlIcon = canvas.toDataURL(file.type);
 
             var imageLocalIcon = new Image();

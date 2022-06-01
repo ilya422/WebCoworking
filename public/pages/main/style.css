@@ -48,6 +48,8 @@ body {
 
 .cart-img {
     height: 93px;
+    width: 93px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -184,6 +186,7 @@ body {
 .card-img {
     height: 256px;
     width: 256px;
+    object-fit: cover;
 }
 
 .card-title{
