@@ -20,7 +20,7 @@ class AuthController {
             }
             RegCodeController.deleteCode(email)
             const hashPassword = bcrypt.hashSync(password, 7)
-            await userController.createUserFromReg({ first_name, last_name, email, hashPassword })
+            await userController.createUserFromReg({ first_name, last_name, email, id_faculty, hashPassword })
             return res.json({ message: "Пользователь успешно создан" })
         } catch (e) {
             console.log(e)

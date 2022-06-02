@@ -48,9 +48,9 @@ body {
 }
 
 .cart-img {
+    position: absolute;
+    top: 2px;
     height: 93px;
-    width: 93px;
-    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -116,9 +116,7 @@ body {
 
 .service-price {
     display: flex;
-    flex-direction: row;
     font-size: 20px;
-    margin-bottom: 10px;
 }
 
 .price {
@@ -131,12 +129,6 @@ body {
 
 .email-user{
     margin-left: 5px;
-}
-
-#service-img{
-    height: 256px;
-    width: 256px;
-    object-fit: cover;
 }
 
 @media (max-width: 1200px) {
@@ -180,21 +172,20 @@ body {
         align-items: center;
     }
 
-    .service-call {
-        flex-direction: column;
-        text-align: center;
-    }
-
 }
 
 @media (max-width: 767px) {
     .container {
         max-width: none;
     }
-    
+
+    .header {
+        padding-right: 60px;
+    }
+
     .nav-item {
         padding: 10px 0px;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 600;
     }
 
@@ -243,15 +234,6 @@ body {
         font-size: 17px;
         flex-direction: column;
         text-align: center;
-    }
-
-    .site-logo{
-        width: 60px;
-    }
-
-    .cart-img{
-        height: 80px;
-        width: 80px;
     }
 
 }

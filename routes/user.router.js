@@ -4,7 +4,7 @@ const userController = require('../controller/user.controller')
 const authMiddleware = require('../middleware/auth.middleware')
 const recoveryMiddleware = require('../middleware/recovery_pass.middleware')
 
-router.post('/api/user', userController.createUser)
+// router.post('/api/user', userController.createUser)
 // router.get('/api/user', userController.getUsers)
 router.get('/api/user/id', authMiddleware, userController.getOneUserByID)
 router.get('/api/user/email/:email', userController.getOneUserByEmail)
