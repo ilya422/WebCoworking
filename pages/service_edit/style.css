@@ -21,16 +21,6 @@ body {
     justify-content: center;
 }
 
-.header-logo {
-    margin-right: 20%;
-}
-
-.buttons {
-    justify-content: space-around;
-    display: flex;
-    align-items: center;
-}
-
 .nav {
     margin: 0px 10px;
 }
@@ -50,26 +40,50 @@ body {
     color: rgb(125, 179, 212);
 }
 
-.btns {
-    display: flex;
-}
-
 .cart {
+    position: relative;
     border-left: 2px solid rgb(58, 67, 75);
     padding-left: 10px;
     height: 80px;
 }
 
 .cart-img {
-    margin-bottom: 10px;
-    top: 2px;
     height: 93px;
     width: 93px;
     object-fit: cover;
     border-radius: 50%;
 }
 
-.create_form {
+.create-item {
+    margin-right: 30px;
+}
+
+.btns {
+    display: flex;
+    padding-left: 10%;
+}
+
+.button {
+    background-color: rgb(60, 143, 226);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 18px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 30px;
+    transition: background-color 0.2s linear;
+}
+
+input[type="submit"]{
+    font-size: 15px;
+    border: 0px;
+}
+
+.button:hover {
+    background-color: rgb(34, 76, 118);
+}
+
+.service-form {
     background-color: rgba(198, 198, 198, 0.226);
     width: 65%;
     border-radius: 20px;
@@ -82,165 +96,106 @@ body {
     position: relative;
 }
 
-.answer {
-    display: flex;
-    flex-direction: column;
-}
-
-#img_inp{
+#img-download{
     width: 170px;
     margin-top: 10px;
 }
 
-.title {
+.title{
     font-family: 'Tinos', serif;
     color: rgb(36, 48, 60);
     font-size: 20px;
 }
 
-#form,
-#form-type,
-#name,
-#desc,
-#price,
-#count_mem,
-#time_end,
-#img,
-#tag {
+.service-text {
+    position: relative;
+    flex-direction: column;
+    display: flex;
+}
+
+#service {
     border-radius: 5px;
     margin-bottom: 10px;
     margin-top: 5px;
+    font-family: 'Tinos', serif;
 }
 
-#name,
-#time_end {
+.service-description {
+    height: 150px;
+    width: 120%;
+    border: 2px solid rgb(60, 143, 226);
+    font-size: 18px;
+}
+
+.service-name, .service-tag, .service-price, .service-date {
     height: 25px;
     border: 2px solid rgb(60, 143, 226);
     font-size: 18px;
-    font-family: 'Tinos', serif;
-}
-
-#form-type,
-#tag,
-#price,
-#count_mem {
-    height: 31px;
-    font-size: 18px;
-    font-family: 'Tinos', serif;
-}
-
-#create_service,
-#create_event {
-    align-items: center;
-}
-
-.form-desc {
-    height: 120px;
-    width: 120%;
-    border: 2px solid rgb(60, 143, 226);
-    max-width: 400px;
-    font-family: 'Tinos', serif;
-    font-size: 18px;
-}
-
-.form-name {
-    height: 20px;
-    border: 2px solid rgb(60, 143, 226);
-}
-
-input[type="number"] {
-    width: 100px;
-}
-
-.button {
-    background-color: rgb(60, 143, 226);
-    color: #fff;
-    text-decoration: none;
-    padding: 14px 18px;
-    font-weight: 600;
-    font-family: 'Open Sans', sans-serif;
-    border-radius: 30px;
-
-    transition: background-color 0.2s linear;
-}
-
-.button:hover {
-    background-color: rgb(34, 76, 118);
 }
 
 select {
-    width: 150px;
+    width: 50%;
     min-height: 25px;
     border: 2px solid rgb(60, 143, 226);
 }
 
-#success_info {
-    width: auto;
-    height: 30px;
-    background-color: rgba(255, 233, 136, 0.873);
-    border-radius: 20px;
-    padding: 10px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Open Sans', sans-serif;
-
+input[type="number"]{
+    width: 30%;
 }
 
-.img-choice {
+.img-block{
     display: flex;
     flex-direction: column;
-    padding-left: 120px;
+    padding-left: 130px;
     align-items: center;
 }
 
-#form-img{
+.service-img{
     height: 256px;
     width: 256px;
     object-fit: cover;
+}
+
+input[type="file"]{
+    width: 150px;
+    margin-top: 5px;
 }
 
 @media (max-width: 1200px) {
     .container {
         max-width: 970px;
     }
+    .service-form{
+        flex-direction: column-reverse;
+    }
 
+    .service-text{
+        align-items: center;
+    }
+
+    .img-block{
+        padding-left: 0px;
+        margin-bottom: 20px;
+    }
     .nav-item {
         padding: 10px 0px;
+        font-size: 14px;
         font-weight: 600;
     }
 
     .nav {
         display: flex;
+        flex-direction: column;
     }
 
     .btns {
         align-items: center;
     }
 
-    #create_service,
-    #create_event {
-        flex-direction: column-reverse;
-    }
-
-    .img-choice {
-        padding-left: 0px;
-        padding-bottom: 15px;
-    }
-
-    .type {
+    .title{
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        justify-content: center;
     }
-
-    .answer {
-        text-align: center;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-    }
-
 }
 
 @media (max-width: 992px) {
@@ -248,23 +203,29 @@ select {
         max-width: 750px;
     }
 
-    .header-logo {
-        margin-right: 0%;
+    .nav-item {
+        padding: 10px 0px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
     }
 
     .btns {
         align-items: center;
     }
 
-    .create-form {
-        flex-direction: column;
+    .service-name {
         text-align: center;
     }
 
-    .click-item {
-        margin-bottom: 20px;
+    .service-time {
+        flex-direction: column;
+        text-align: center;
     }
-
 }
 
 @media (max-width: 767px) {
@@ -295,40 +256,44 @@ select {
         padding: 8px 10px;
         display: flex;
         text-align: center;
-        justify-content: center;
     }
 
     .create-item {
         margin-right: 0px;
     }
 
-    .create_form {
-        width: 80%;
-    }
-
-    .click-item {
-        margin-bottom: 5px;
-    }
-
-    .site-logo {
+    .site-logo{
         width: 60px;
     }
 
-    .cart-img {
+    .cart-img{
         height: 80px;
+        width: 80px;
     }
 
-    #name{
-        width: 90%;
+    .service-form {
+        width: 70%;
     }
 
+    .service-text {
+        padding: 0px 20px;
+        font-size: 17px;
+    }
 
-    .form-desc {
-        height: 120px;
+    .service-form {
+        width: 80%;
+    }
+
+    .service-text {
+        padding: 0px 20px;
+        font-size: 17px;
+    }
+
+    .service-description{
         width: 100%;
-        border: 2px solid rgb(60, 143, 226);
-        max-width: 300px;
-        font-family: 'Tinos', serif;
-        font-size: 18px;
+    }
+
+    .service-name{
+        width: 90%;
     }
 }

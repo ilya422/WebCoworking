@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ваши объявление</title>
+    <title>Выбранные мероприятия</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,17 +14,17 @@
 </head>
 
 <body>
-    <div class="header">
+    <div class='header'>
         <div class="container">
             <div class="header-line">
                 <div class="header-logo">
                     <a href="/">
-                        <img class="site-logo" src="/public/content/img/utmn.png" alt="">
+                        <img  class ="site-logo" src="/public/content/img/utmn.png" alt="">
                     </a>
                 </div>
                 <div class="btns">
                     <div class="create-item">
-                        <a class="button" href="/create_ad">Создать объявление</a>
+                        <a class="button" id="btn-create" href="/create_ad">Создать объявление</a>
                     </div>
 
                     <div class="nav">
@@ -32,48 +32,27 @@
                         <a class="nav-item" href="/our_ad">ВАШИ ОБЪЯВЛЕНИЯ</a>
                     </div>
                 </div>
-
                 <div class="cart">
                     <a href="/profile">
                         <img class="cart-img" id="profile_img" src="/public/content/img/profile.png" alt="">
                     </a>
                 </div>
             </div>
-            <div class="header-down">
-                <div class="header-title">
-                    Добро пожаловать
-                    <div class="header-subtitle">
-                        Нетворкинг ТюмГУ
-                    </div>
-                    <div class="suptitle-strips">
-                        <div class="strip-left"></div>
-                        <div class="header-suptitle">
-                            ПРОЯВИ СЕБЯ
-                        </div>
-                        <div class="strip-right"></div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+
     <div class="container">
-        <div class="cards">
-            <div class="no-card" style="display: none;">У вас нет ни одного мероприятия</div>
-            <div class="cards-holder">
-            </div>
+        <div class="no-card" style="display: none;">Вы не записаны <br> ни на одно мероприятие</div>
+        <div class="card-event">
         </div>
     </div>
-
-
-
     
-    <div class="b-popup" style="display: none;">
+    <div class="b-popup" style="display: none;" >
         <div class="b-popup-content">
-            <div class="popup-answer"> Вы уверены, что хотите удалить объявление?</div>
-            <div class="popup-answer" id="name_modal_adv"></div>
+            <div class="popup-answer"> Вы уверены, что хотите отменить участие?</div>
             <div class="btns-popup">
                 <div class="click-item">
-                    <a id="btn-delete" onclick="close_modal(true)">Да</a>
+                    <a class="btn-delete"  onclick="close_modal(true)">Да</a>
                 </div>
                 <div class="click-item">
                     <a class="btn-cancel"  onclick="close_modal(false)">Нет</a>
@@ -81,8 +60,6 @@
             </div>
         </div>
     </div>
-
 </body>
 <script src="index.js"></script>
-
 </html>

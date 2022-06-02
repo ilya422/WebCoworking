@@ -243,8 +243,9 @@ body {
     color: rgba(206, 206, 206, 0.571);
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
-    font-size: 35px;
-    padding-top: 30px;
+    font-size: 33px;
+    padding: 30px 10px;
+    text-align: center;
 }
 /*****************Модальное окно***********************/
 
@@ -448,5 +449,6 @@ body {
 
     .cart-img{
         height: 80px;
+        width: 80px;
     }
 }
