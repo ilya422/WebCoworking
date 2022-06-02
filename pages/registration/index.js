@@ -1,5 +1,6 @@
 window.onload = load_page()
 function load_page() {
+    getFaculty()
     //Закрытие модального окна при клике в не его контента
     const div = document.querySelector('.b-popup');
     document.addEventListener('click', (e) => {
@@ -10,19 +11,36 @@ function load_page() {
     })
 }
 
+async function getFaculty() {
+    let response = await fetch('/api/faculty');
+    if (response.ok) {
+        let selector = document.getElementById('faculty');
+        let json_data = await response.json();
+        for (var i in json_data) {
+            var v = json_data[i];
+            if (v.name != 'Все') {
+                selector.innerHTML += `<option value="${v.id}">${v.name}</option>`;
+            }
+        }
+    } else {
+        console.log('error', response.status);
+    }
+}
+
 async function registration() {
     let info_div = document.querySelector('.attention')
     info_div.style.display = 'none'
     let info_div_pop = document.getElementById('popup-attention')
     info_div_pop.style.display = 'none'
 
-    const {first_name, last_name, email, password1} = await checkValues(1)
+    const {first_name, last_name, email, id_faculty, password1} = await checkValues(1)
     const code = document.querySelector(".code").value
 
     let body_json = {
         "first_name": first_name,
         "last_name": last_name,
         "email": email,
+        "id_faculty": 1, // сделать
         "password": password1,
         "code": code
     }
@@ -98,11 +116,13 @@ async function checkValues(type) {
     let first_name = document.getElementById("first_name").value
     let last_name = document.getElementById("last_name").value
     let email = document.getElementById("email").value
+    let faculty_selecter = document.getElementById('faculty')
+    var id_faculty = faculty_selecter.options[faculty_selecter.selectedIndex].value;
     let password1 = document.getElementById("password1").value
     let password2 = document.getElementById("password2").value
 
 
-    if (first_name.trim() == '' || last_name.trim() == '' || email.trim() == '' || password1.trim() == '' || password2.trim() == '') {
+    if (first_name.trim() == '' || last_name.trim() == '' || email.trim() == '' || id_faculty != 0 || password1.trim() == '' || password2.trim() == '') {
         info_div.innerHTML = "Заполните все поля!"
         info_div.style.display = 'flex'
         return
@@ -140,7 +160,7 @@ async function checkValues(type) {
         return
     }
     else {
-        return {first_name, last_name, email, password1}
+        return {first_name, last_name, email, id_faculty, password1}
     }
 
 }

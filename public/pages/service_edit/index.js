@@ -2,13 +2,13 @@ let getURL = window.location.href.split("/")
 id_adv = getURL[getURL.length - 2]
 window.onload = load_page()
 function load_page() {
-    getAdv();
     getProfileImage();
     getTags();
+    getAdv();
 }
 
 async function checkUser(user_id, role) {
-    response = await fetch(`/api/event_adv/${id_adv}`)
+    response = await fetch(`/api/service_adv/${id_adv}`)
 
     if (response.ok) {
         json_data = await response.json();
@@ -41,7 +41,7 @@ async function getProfileImage() {
 async function getTags() {
     let response = await fetch('/api/tag');
     if (response.ok) {
-        selector = document.querySelector('.event-tag');
+        selector = document.querySelector('.service-tag');
         json_data = await response.json();
         for (var i in json_data) {
             var v = json_data[i];
@@ -53,29 +53,17 @@ async function getTags() {
 }
 
 async function getAdv() {
-    response = await fetch(`/api/event_adv/${id_adv}`)
+    response = await fetch(`/api/service_adv/${id_adv}`)
 
     if (response.ok) {
         json_data = await response.json();
-        document.querySelector('.event-img').src = json_data.img
-        document.querySelector('.event-name').value = json_data.name
+        document.querySelector('.service-img').src = json_data.img
+        document.querySelector('.service-name').value = json_data.name
+        document.querySelector('.service-tag').value = json_data.id_tag
         new_description = json_data.description.replace('</p><p>', String.fromCharCode(13, 10))
-        document.querySelector('.event-description').value = new_description
-        document.querySelector('.event-tag').value = json_data.id_tag
-        document.querySelector('.event-people').value = json_data.count_member
-        var date = json_data.time_end.split('-')
-        date = date[2] + "-" + date[1] + "-" + date[0]
-        document.querySelector('.event-date').value = date
+        document.querySelector('.service-description').value = new_description
+        document.querySelector('.service-price').value = json_data.price
 
-        const options = {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-        }
-        const min_date = new Date()
-        min_date.setDate(min_date.getDate() + 1)
-        const tomorrow = min_date.toLocaleString("ru", options).split('.').reverse().join('-')
-        document.querySelector('.event-date').setAttribute('min', tomorrow)
     } else {
         console.log('error', response.status);
     }
@@ -97,37 +85,14 @@ function showIMG(input) {
             var canvas = document.createElement('canvas');
             canvas.width = 256; canvas.height = 256;
             var context = canvas.getContext('2d');
-
-            var imgWidth = imageLocalFull.naturalWidth;
-            var screenWidth = canvas.width;
-            var scaleX = 1;
-            if (imgWidth > screenWidth)
-                scaleX = screenWidth / imgWidth;
-            var imgHeight = imageLocalFull.naturalHeight;
-            var screenHeight = canvas.height;
-            var scaleY = 1;
-            if (imgHeight > screenHeight)
-                scaleY = screenHeight / imgHeight;
-            var scale = scaleY;
-            if (scaleX < scaleY)
-                scale = scaleX;
-            if (scale < 1) {
-                imgHeight = imgHeight * scale;
-                imgWidth = imgWidth * scale;
-            }
-
-            canvas.height = imgHeight;
-            canvas.width = imgWidth;
-
-            context.drawImage(imageLocalFull, 0, 0, imageLocalFull.naturalWidth, imageLocalFull.naturalHeight, 0, 0, imgWidth, imgHeight);
-
+            context.drawImage(imageLocalFull, 0, 0, 256, 256);
             var imageUrlIcon = canvas.toDataURL(file.type);
 
             var imageLocalIcon = new Image();
             imageLocalIcon.src = imageUrlIcon;
 
             imageLocalIcon.onload = function () {
-                let lable = document.querySelector('.event-img')
+                let lable = document.querySelector('.service-img')
                 lable.src = imageLocalIcon.src
             };
         }
@@ -135,27 +100,23 @@ function showIMG(input) {
 }
 
 async function update_adv() {
-    let name = document.querySelector('.event-name').value
-    let description = document.querySelector('.event-description').value
+    let name = document.querySelector('.service-name').value
+    let description = document.querySelector('.service-description').value
     new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
-    let tag = document.querySelector('.event-tag').value
-    let count_member = document.querySelector('.event-people').value
-    let date = document.querySelector('.event-date').value
-    let img = document.querySelector('.event-img').src
+    let tag = document.querySelector('.service-tag').value
+    let price = document.querySelector('.service-price').value
+    let img = document.querySelector('.service-img').src
 
     let body_json = {
         "id": id_adv,
         "name": name,
         "description": new_description,
-        "count_member": count_member,
-        "time_end": date,
+        "price": price,
         "img": img,
-        "id_tag": tag,
-        "id_faculty" : 1 // сделать
+        "id_tag": tag
     }
-    console.log(tag)
     try {
-        let response = await fetch(`/api/event_adv/:${id_adv}`, {
+        let response = await fetch(`/api/service_adv/:${id_adv}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -164,5 +125,5 @@ async function update_adv() {
         })
         await response.ok;
     }
-    catch (e) { console.log(e) }
+    catch(e) { console.log(e) }
 }

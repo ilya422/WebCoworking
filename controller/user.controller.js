@@ -3,21 +3,21 @@ const bcrypt = require('bcryptjs');
 
 class UserController {
     async createUser(req, res) {
-        const {first_name, last_name, email, password} = req.body
+        const {first_name, last_name, email, id_faculty, password} = req.body
         const sql = await db.query(
             `INSERT INTO public.users(
-            first_name, last_name, email, password)
-            VALUES ($1, $2, $3, $4)`, [first_name, last_name, email, password]
+            first_name, last_name, email, id_faculty, password)
+            VALUES ($1, $2, $3, $4, $5)`, [first_name, last_name, email, id_faculty, password]
         )
         res.json({message: "Пользователь создан"})
     }
 
     async createUserFromReg(req) {
-        const {first_name, last_name, email, hashPassword} = req
+        const {first_name, last_name, email, id_faculty, hashPassword} = req
         const sql = await db.query(
             `INSERT INTO public.users(
-            first_name, last_name, email, password)
-            VALUES ($1, $2, $3, $4)`, [first_name, last_name, email, hashPassword]
+            first_name, last_name, email, id_faculty, password)
+            VALUES ($1, $2, $3, $4, $5)`, [first_name, last_name, email, id_faculty, hashPassword]
         )
         return
     }
@@ -25,8 +25,9 @@ class UserController {
     async getUsers(req, res) {
         const id = req.params.id
         const sql = await db.query(
-            `SELECT u.id, first_name, last_name, email, r.name as role, img
+            `SELECT u.id, first_name, last_name, email, f.name as faculty, r.name as role, img
             FROM public.users as u
+			JOIN public.faculties as f ON id_faculty = f.id
             JOIN public.roles as r ON id_roles = r.id`
         )
         res.json(sql.rows)
@@ -35,8 +36,9 @@ class UserController {
     async getOneUserByID(req, res) {
         const id = req.user.id
         const sql = await db.query(
-            `SELECT u.id, first_name, last_name, email, r.name as role, img
+            `SELECT u.id, first_name, last_name, email, f.name as faculty, r.name as role, img
             FROM public.users as u
+			JOIN public.faculties as f ON id_faculty = f.id
             JOIN public.roles as r ON id_roles = r.id
             WHERE u.id = $1`, [id]
         )
@@ -46,8 +48,9 @@ class UserController {
     async getOneUserByEmail(req, res) {
         const email = req.params.email
         const sql = await db.query(
-            `SELECT u.id, first_name, last_name, email, r.name as role, img
+            `SELECT u.id, first_name, last_name, email, f.name as faculty, r.name as role, img
             FROM public.users as u
+			JOIN public.faculties as f ON id_faculty = f.id
             JOIN public.roles as r ON id_roles = r.id
             WHERE email = $1`, [email]
         )
@@ -57,8 +60,9 @@ class UserController {
     async findOneUserByEmail(req) {
         const email = req.email
         const sql = await db.query(
-            `SELECT u.id, first_name, last_name, email, r.name as role, password, img
+            `SELECT u.id, first_name, last_name, email, f.name as faculty, r.name as role, password, img
             FROM public.users as u
+            JOIN public.faculties as f ON id_faculty = f.id
             JOIN public.roles as r ON id_roles = r.id
             WHERE email = $1`, [email]
         )
@@ -67,8 +71,9 @@ class UserController {
 
     async findOneUserByID(id) {
         const sql = await db.query(
-            `SELECT u.id, r.name as role
+            `SELECT u.id, f.name as faculty, r.name as role
             FROM public.users as u
+            JOIN public.faculties as f ON id_faculty = f.id
             JOIN public.roles as r ON id_roles = r.id
             WHERE u.id = $1`, [id]
         )
