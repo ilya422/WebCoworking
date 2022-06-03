@@ -2,11 +2,12 @@ const respond_btn = document.getElementById("respond_btn")
 const getURL = window.location.href.split("/")
 const id_event_adv = getURL[getURL.length-2]
 let current_member, count_member;
+let id_user;
 
 window.onload = load_page()
 function load_page() {
-    getAdv();
     getUser();
+    getAdv();
 }
 
 async function getUser() {
@@ -16,6 +17,7 @@ async function getUser() {
             json_data_user = await response_user.json();
             img = document.getElementById('profile_img');
             img.src = json_data_user[0].img;
+            id_user = json_data_user[0].id
 
             let response_sub = await fetch(`/api/sub_events/user_adv/${id_event_adv}`)
             if (response_sub.ok){
@@ -31,7 +33,6 @@ async function getUser() {
             else {
                 console.log('error', response_sub.status);
             }
-    
         } else {
             console.log('error', response_user.status);
         }
@@ -43,20 +44,39 @@ async function getUser() {
 }
 
 async function getAdv() {
-    response = await fetch(`/api/event_adv/${id_event_adv}`)
+    let response = await fetch(`/api/event_adv/${id_event_adv}`)
 
     if (response.ok) {
-        json_data = await response.json();
+        let json_data = await response.json();
         document.getElementById('event-img').src = json_data.img
         document.querySelector('.event-name').innerHTML = json_data.name
         document.querySelector('.event-tag').innerHTML = "#" + json_data.tag
         document.querySelector('.event-description').innerHTML = json_data.description
         document.getElementById('event-data').innerHTML = json_data.time_end
-        document.querySelector('.event-people').innerHTML = "Количество откликнувшихся: " + 
-        json_data.current_member + " / " + json_data.count_member
+        document.querySelector('.count-people').innerHTML = json_data.current_member + " / " + json_data.count_member
 
         current_member = json_data.current_member;
         count_member = json_data.count_member;
+        
+        if (json_data.id_user_add == id_user) {
+            getAdvRespond()
+        }
+    } else {
+        console.log('error', response.status);
+    }
+}
+
+async function getAdvRespond()
+{
+    let response = await fetch(`/api/sub_events/${id_event_adv}`)
+    if (response.ok) {
+        let json_data = await response.json();
+        let list = document.querySelector('.list-member')
+        for (var i in json_data) {
+            var u = json_data[i];
+            list.innerHTML += `<div class="member-mail">${u.email}</div>`
+        }
+        list.style.display = 'flex'
     } else {
         console.log('error', response.status);
     }

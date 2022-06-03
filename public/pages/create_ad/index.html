@@ -10,15 +10,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tinos&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
     <div class='header'>
-        <div class="'container">
+        <div class="container">
             <div class="header-line">
                 <div class="header-logo">
                     <a href="/">
-                        <img src="/public/content/img/utmn.png" alt="">
+                        <img class="site-logo" src="/public/content/img/utmn.png" alt="">
                     </a>
                 </div>
                 <div class='buttons'>
@@ -37,13 +38,15 @@
             </div>
         </div>
     </div>
-    <div class="create_form">
-        <div class="form">
+    <div class="container">
+        <div class="create_form">
             <div class="type">
-                <a class="title"><b>Тип объявления:</b></a><br>
-                <select class="form-name" id="form-type" onChange="selected_type(this)">
+                <div>
+                    <a class="title"><b>Тип объявления:</b></a><br>
+                    <select class="form-name" id="form-type" onChange="selected_type(this)">
 
-                </select><br>
+                    </select><br>
+                </div>
                 <div id="view_form">
 
                 </div>

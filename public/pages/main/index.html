@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tinos&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
             <div class="header-line">
                 <div class="header-logo">
                     <a href="/">
-                        <img src="/public/content/img/utmn.png" alt="">
+                        <img class="site-logo" src="/public/content/img/utmn.png" alt="">
                     </a>
                 </div>
                 <div class="btns">
@@ -40,12 +41,16 @@
             </div>
             <div class="header-down">
                 <div class="header-title">
-                    Добро пожаловать в
+                    Добро пожаловать
                     <div class="header-subtitle">
-                        Нетворкинг ИМиКН
+                        Нетворкинг ТюмГУ
                     </div>
-                    <div class="header-suptitle">
-                        ПРОЯВИ СЕБЯ
+                    <div class="suptitle-strips">
+                        <div class="strip-left"></div>
+                        <div class="header-suptitle">
+                            ПРОЯВИ СЕБЯ
+                        </div>
+                        <div class="strip-right"></div>
                     </div>
                 </div>
             </div>
@@ -54,9 +59,13 @@
     <div class="container">
         <div class="choice">
             <select class="type" id="type_choice" onChange="selected_type(this)">
-                <option value="0">Все</option>
-
+                <option value="0">Все по типу</option>
             </select>
+
+            <select class="tag" id="tag_choice" onChange="selected_tag(this)">
+                <option value="0">Все по тегам</option>
+            </select>
+
         </div>
         <div class="cards">
             <div class="cards-holder">

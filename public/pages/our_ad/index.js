@@ -1,8 +1,8 @@
 let adv_for_del = []
 window.onload = load_page()
 function load_page() {
-    getProfileImage();
     getAllAdv();
+    getProfileImage();
 }
 
 async function getProfileImage() {
@@ -12,12 +12,12 @@ async function getProfileImage() {
             json_data = await response.json();
             img = document.getElementById('profile_img');
             img.src = json_data[0].img;
-    
+
         } else {
             console.log('error', response.status);
         }
     }
-    catch {}
+    catch { }
 }
 
 
@@ -37,14 +37,18 @@ async function getAllAdv() {
             return dateB - dateA
         });
 
-        for (var i in json_data) {
-            var v = json_data[i];
-            if (v.type == 'Мероприятие') {
-                div.innerHTML += card_event(v);
+        if (json_data.length != 0) {
+            for (var i in json_data) {
+                var v = json_data[i];
+                if (v.type == 'Мероприятие') {
+                    div.innerHTML += card_event(v);
+                }
+                else if (v.type == 'Услуга') {
+                    div.innerHTML += card_servise(v);
+                }
             }
-            else if (v.type == 'Услуга') {
-                div.innerHTML += card_servise(v);
-            }
+        } else {
+            document.querySelector('.no-card').style.display = 'block'
         }
     } else {
         console.log('error', response_ev.status, response_ser.status);

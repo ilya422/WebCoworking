@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нетворкинг</title>
+    <title>Профиль</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tinos&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
 </head>
 
 <body>
@@ -43,8 +44,11 @@
                     </div>
                 </div>
                 <div class="profile_btn">
-                    <a class="button" id="bttn_exit" onclick="logout()">Выйти</a>
-                    <a class="button" id="bttn_edit" href="/profile_edit">Редактировать</a>
+                    <div class="first-line-btn">
+                        <a class="button" id="bttn_exit" onclick="logout()">Выйти</a>
+                        <a class="button" id="bttn_edit" href="/profile_edit">Редактировать</a>
+                    </div>
+                    <a id="bttn_exit_all" onclick="logoutAll()">Выйти со всех устройств</a>
                 </div>
             </div>
             <div class="text_account">
@@ -62,6 +66,19 @@
                 </div>
             </div>
         </div>
+        <div class="tags-form">
+            <div class="find-tags">
+                <div class="text-tags">Выберите теги объявлений для рассылки обновлений: </div>
+                <select class="tag" id="tag_choice" onChange="selected_tag(this)">
+                    <option value="0">Не выбран</option>
+                </select>
+            </div>
+            <div class="no-tags" style="display: none;">У вас не добавлено <br>ни одного тега</div>
+            <div class="list-tags">
+
+            </div>
+        </div>
 </body>
 <script src="index.js"></script>
+
 </html>

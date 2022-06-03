@@ -48,9 +48,9 @@ body {
 }
 
 .cart-img {
-    position: absolute;
-    top: 2px;
     height: 93px;
+    width: 93px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -71,8 +71,12 @@ body {
     font-weight: 600;
     font-family: 'Open Sans', sans-serif;
     border-radius: 30px;
-
     transition: background-color 0.2s linear;
+}
+
+input[type="submit"]{
+    font-size: 15px;
+    border: 0px;
 }
 
 .button:hover {
@@ -90,6 +94,11 @@ body {
     justify-content: center;
     font-size: 20px;
     position: relative;
+}
+
+#img-download{
+    width: 170px;
+    margin-top: 10px;
 }
 
 .title{
@@ -142,7 +151,9 @@ input[type="number"]{
 }
 
 .service-img{
-    height: 200px;
+    height: 256px;
+    width: 256px;
+    object-fit: cover;
 }
 
 input[type="file"]{
@@ -222,13 +233,9 @@ input[type="file"]{
         max-width: none;
     }
 
-    .header {
-        padding-right: 60px;
-    }
-
     .nav-item {
         padding: 10px 0px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
     }
 
@@ -255,6 +262,15 @@ input[type="file"]{
         margin-right: 0px;
     }
 
+    .site-logo{
+        width: 60px;
+    }
+
+    .cart-img{
+        height: 80px;
+        width: 80px;
+    }
+
     .service-form {
         width: 70%;
     }
@@ -262,5 +278,22 @@ input[type="file"]{
     .service-text {
         padding: 0px 20px;
         font-size: 17px;
+    }
+
+    .service-form {
+        width: 80%;
+    }
+
+    .service-text {
+        padding: 0px 20px;
+        font-size: 17px;
+    }
+
+    .service-description{
+        width: 100%;
+    }
+
+    .service-name{
+        width: 90%;
     }
 }

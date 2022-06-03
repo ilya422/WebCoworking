@@ -33,15 +33,32 @@
                 <p><input required class="answer" id="first_name" type="text" size="40" placeholder="Имя"></p>
                 <p><input required class="answer" id="last_name" type="text" size="40" placeholder="Фамилия"></p>
                 <p><input required class="answer" id="email" type="text" size="40" placeholder="Почта@study.utmn.ru"></p>
+                <p><select class="answer" id="faculty">
+                    <option value="0"></option>
+                </select></p>
                 <p><input required class="answer" id="password1" type="text" size="40" placeholder="Пароль"></p>
                 <p><input required class="answer" id="password2"  type="text" size="40" placeholder="Повторите пароль"></p>
             </div><br>
-            <a class="button-registration" onclick="registration()">Зарегистрироваться</a><br>
+            <a class="button-registration" onclick="checkValues(0)">Зарегистрироваться</a><br>
             <div class="attention" style="display: none;"></div>
         </div>
-
     </div>
 
+    <div class="b-popup" style="display: none;">
+        <div class="b-popup-content">
+            <div class="popup-answer"> Введите код из письма присланного вам на почту</div><br>
+            <div class="attention" id="popup-attention" style="display: none;"></div>
+            <input required class="code" type="text" size="20" placeholder="Код" style="width: 50%;">
+            <div class="btns-popup">
+                <div class="click-item">
+                    <a class="btn-send" onclick="registration()">Отправить</a>
+                </div>
+                <div class="click-item">
+                    <a class="btn-repeat" onclick="checkValues(0)">Письма нет</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 <script src="index.js"></script>
 </html>

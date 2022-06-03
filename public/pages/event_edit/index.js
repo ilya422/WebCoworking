@@ -2,9 +2,9 @@ let getURL = window.location.href.split("/")
 id_adv = getURL[getURL.length - 2]
 window.onload = load_page()
 function load_page() {
+    getAdv();
     getProfileImage();
     getTags();
-    getAdv();
 }
 
 async function checkUser(user_id, role) {
@@ -66,6 +66,16 @@ async function getAdv() {
         var date = json_data.time_end.split('-')
         date = date[2] + "-" + date[1] + "-" + date[0]
         document.querySelector('.event-date').value = date
+
+        const options = {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+        }
+        const min_date = new Date()
+        min_date.setDate(min_date.getDate() + 1)
+        const tomorrow = min_date.toLocaleString("ru", options).split('.').reverse().join('-')
+        document.querySelector('.event-date').setAttribute('min', tomorrow)
     } else {
         console.log('error', response.status);
     }
@@ -87,7 +97,30 @@ function showIMG(input) {
             var canvas = document.createElement('canvas');
             canvas.width = 256; canvas.height = 256;
             var context = canvas.getContext('2d');
-            context.drawImage(imageLocalFull, 0, 0, 256, 256);
+
+            var imgWidth = imageLocalFull.naturalWidth;
+            var screenWidth = canvas.width;
+            var scaleX = 1;
+            if (imgWidth > screenWidth)
+                scaleX = screenWidth / imgWidth;
+            var imgHeight = imageLocalFull.naturalHeight;
+            var screenHeight = canvas.height;
+            var scaleY = 1;
+            if (imgHeight > screenHeight)
+                scaleY = screenHeight / imgHeight;
+            var scale = scaleY;
+            if (scaleX < scaleY)
+                scale = scaleX;
+            if (scale < 1) {
+                imgHeight = imgHeight * scale;
+                imgWidth = imgWidth * scale;
+            }
+
+            canvas.height = imgHeight;
+            canvas.width = imgWidth;
+
+            context.drawImage(imageLocalFull, 0, 0, imageLocalFull.naturalWidth, imageLocalFull.naturalHeight, 0, 0, imgWidth, imgHeight);
+
             var imageUrlIcon = canvas.toDataURL(file.type);
 
             var imageLocalIcon = new Image();
@@ -117,7 +150,8 @@ async function update_adv() {
         "count_member": count_member,
         "time_end": date,
         "img": img,
-        "id_tag": tag
+        "id_tag": tag,
+        "id_faculty" : 1 // сделать
     }
     console.log(tag)
     try {

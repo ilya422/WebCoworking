@@ -48,6 +48,8 @@ body {
 
 .cart-img {
     height: 93px;
+    width: 93px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -184,8 +186,9 @@ body {
 }
 
 .card-img {
-    height: 260px;
-    width: 260px;
+    height: 256px;
+    width: 256px;
+    object-fit: cover;
 }
 
 .card-title{
@@ -235,6 +238,15 @@ body {
     font-size: 18px;
     color:rgb(34, 76, 118);
 }
+
+.no-card {
+    color: rgba(206, 206, 206, 0.571);
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 33px;
+    padding: 30px 10px;
+    text-align: center;
+}
 /*****************Модальное окно***********************/
 
 .b-popup {
@@ -269,7 +281,7 @@ body {
     justify-content: space-evenly;
 }
 
-#btn-delete {
+#btn-delete, .btn-cancel {
     color: #fff;
     text-decoration: none;
     padding: 14px 18px;
@@ -280,16 +292,20 @@ body {
     transition: background-color 0.2s linear;
 }
 
- #btn-delete:hover {
+#btn-delete:hover {
     background-color: rgb(118, 34, 34);
+}
+
+.btn-cancel:hover {
+    background-color: rgb(119, 119, 119);
 }
 
 #btn-delete {
     background-color: rgb(226, 60, 60);
 }
 
-#btn-cancel{
-    color: #000;
+.btn-cancel{
+    background-color: rgb(189, 189, 189);
 }
 /**************************************************/
 
@@ -367,7 +383,7 @@ body {
 
     .nav-item {
         padding: 10px 0px;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
     }
 
@@ -425,5 +441,14 @@ body {
 
     .b-popup .b-popup-content{
         margin: 40% auto;
+    }
+
+    .site-logo{
+        width: 60px;
+    }
+
+    .cart-img{
+        height: 80px;
+        width: 80px;
     }
 }

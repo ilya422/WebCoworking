@@ -1,7 +1,7 @@
 window.onload = load_page()
 function load_page() {
-    getProfileImage();
     getAdv();
+    getProfileImage();
 }
 
 async function getProfileImage() {
