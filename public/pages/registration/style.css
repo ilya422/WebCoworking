@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 15px 0px;
+    margin: 0px auto;
+}
+
+
+.header {
+    background-image: url(/public/content/img/background.png);
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-line {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px 15px;
+}
+
+.logo-img{
+    margin: 0;
+}
+
+.registration-img{
+    position: absolute;
+    right: 0px;
+}
+
+.registration-form {
+    background-color: rgba(198, 198, 198, 0.226);
+    width: 40%;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input[type='text'] 
+{ 
+    font-size: 17px;
+    width: 90%; 
+}
+
+.question{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+.button-registration {
+    background-color: rgb(60, 143, 226);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 18px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 30px;
+    transition: background-color 0.2s linear;
+}
+
+.button-registration:hover{
+    background-color: rgb(34, 76, 118);
+}
+
+
+.attention{
+    margin-top: 10px;
+    border-radius: 20px;
+    background-color: rgb(255, 177, 177);
+    padding: 11px 13px;
+    width: 60%;
+    text-align: center;
+}
+
+.attention-code{
+    margin-top: 20px;
+    border-radius: 20px;
+    background-color: rgb(255, 177, 177);
+    padding: 9px 9px;
+    width: 40%;
+    text-align: center;
+}
+
+@media (max-width: 1200px){
+    .container{
+        max-width: 970px;
+    }
+    .registration-form{
+        width: 50%;
+    }
+}
+
+@media (max-width: 992px){
+    .container{
+        max-width: 750px;
+    }
+    .registration-form{
+        width: 60%;
+    }
+}
+
+@media (max-width: 767px){
+    .container{
+        max-width: none;
+    }
+    .registration-form{
+        width: 60%;
+    }
+    .attention{
+        width: 90%;
+    }
+}

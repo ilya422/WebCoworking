@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    padding: 15px 0px;
+    margin: 0px auto;
+}
+
+.header {
+    background-image: url(/public/content/img/background.png);
+    height: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-line {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 0px 15px;
+}
+
+.logo-img{
+    margin: 0;
+}
+
+.login-img{
+    position: absolute;
+    right: 0px;
+}
+
+.login-form {
+    background-color: rgba(198, 198, 198, 0.226);
+    width: 40%;
+    border-radius: 20px;
+    padding: 30px;
+    margin: 0px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+}
+
+input[type='text'], input[type='password']
+{ 
+    font-size: 17px;
+    width: 90%; 
+}
+
+.question{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+}
+
+.btns-problem{
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+#no-registred{
+    position: absolute;
+    left: 14%;
+}
+
+#forget-password{
+    position: absolute;
+    right: 20%;
+}
+
+.button-problem{
+    text-decoration: none;
+    color: rgb(34, 76, 118);
+    font-family: 'Open Sans', sans-serif;
+}
+.button-problem:hover{
+    color:rgb(10, 45, 79) ;
+}
+
+.button-login {
+    background-color: rgb(60, 143, 226);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 18px;
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 30px;
+    transition: background-color 0.2s linear;
+}
+
+.button-login:hover{
+    background-color: rgb(34, 76, 118);
+}
+
+@media (max-width: 1200px){
+    .container{
+        max-width: 970px;
+    }
+    .login-form{
+        width: 50%;
+    }
+}
+
+@media (max-width: 992px){
+    .container{
+        max-width: 750px;
+    }
+    .login-form{
+        width: 60%;
+    }
+}
+
+@media (max-width: 767px){
+    .container{
+        max-width: none;
+    }
+    .login-form{
+        width: 60%;
+    }
+    .btns-problem{
+        flex-direction: column;
+    }
+    #no-registred{
+        position: static;
+        left: auto;
+    }
+
+    #forget-password{
+        position: static;
+        right: auto;
+    }
+}
