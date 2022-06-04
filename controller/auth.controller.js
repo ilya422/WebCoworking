@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs')
 class AuthController {
     async registration(req, res) {
         try {
-            const { first_name, last_name, email, password, code } = req.body
+            const { first_name, last_name, email, id_faculty, password, code } = req.body
             let regCode = await RegCodeController.getCode(email)
             var CurrentTime = new Date();
             if (regCode[0].time_end <= CurrentTime) {

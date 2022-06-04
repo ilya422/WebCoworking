@@ -40,7 +40,7 @@ async function registration() {
         "first_name": first_name,
         "last_name": last_name,
         "email": email,
-        "id_faculty": 1, // сделать
+        "id_faculty": id_faculty,
         "password": password1,
         "code": code
     }
@@ -116,13 +116,13 @@ async function checkValues(type) {
     let first_name = document.getElementById("first_name").value
     let last_name = document.getElementById("last_name").value
     let email = document.getElementById("email").value
-    let faculty_selecter = document.getElementById('faculty')
+    let faculty_selecter = document.getElementById("faculty")
     var id_faculty = faculty_selecter.options[faculty_selecter.selectedIndex].value;
     let password1 = document.getElementById("password1").value
     let password2 = document.getElementById("password2").value
 
 
-    if (first_name.trim() == '' || last_name.trim() == '' || email.trim() == '' || id_faculty != 0 || password1.trim() == '' || password2.trim() == '') {
+    if (first_name.trim() == '' || last_name.trim() == '' || email.trim() == '' || id_faculty == "0" || password1.trim() == '' || password2.trim() == '') {
         info_div.innerHTML = "Заполните все поля!"
         info_div.style.display = 'flex'
         return
