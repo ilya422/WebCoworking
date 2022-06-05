@@ -2,9 +2,10 @@ let getURL = window.location.href.split("/")
 id_adv = getURL[getURL.length - 2]
 window.onload = load_page()
 function load_page() {
-    getAdv();
-    getProfileImage();
     getTags();
+    getAdv();
+    getFaculty();
+    getProfileImage();
 }
 
 async function checkUser(user_id, role) {
@@ -52,6 +53,22 @@ async function getTags() {
     }
 }
 
+async function getFaculty() {
+    let response = await fetch('/api/faculty');
+    if (response.ok) {
+        let selector = document.getElementById('faculty');
+        let json_data = await response.json();
+        for (var i in json_data) {
+            var v = json_data[i];
+            if (v.name != 'Все') {
+                selector.innerHTML += `<option value="${v.id}">${v.name}</option>`;
+            }
+        }
+    } else {
+        console.log('error', response.status);
+    }
+}
+
 async function getAdv() {
     response = await fetch(`/api/event_adv/${id_adv}`)
 
@@ -62,6 +79,7 @@ async function getAdv() {
         new_description = json_data.description.replace('</p><p>', String.fromCharCode(13, 10))
         document.querySelector('.event-description').value = new_description
         document.querySelector('.event-tag').value = json_data.id_tag
+        document.querySelector('.event-faculty').value = json_data.id_faculty
         document.querySelector('.event-people').value = json_data.count_member
         var date = json_data.time_end.split('-')
         date = date[2] + "-" + date[1] + "-" + date[0]
@@ -139,6 +157,8 @@ async function update_adv() {
     let description = document.querySelector('.event-description').value
     new_description = description.replace(/</g, '').replace(/\n/g, '</p><p>');
     let tag = document.querySelector('.event-tag').value
+    let faculty_selecter = document.getElementById("faculty")
+    var id_faculty = faculty_selecter.options[faculty_selecter.selectedIndex].value;
     let count_member = document.querySelector('.event-people').value
     let date = document.querySelector('.event-date').value
     let img = document.querySelector('.event-img').src
@@ -151,7 +171,7 @@ async function update_adv() {
         "time_end": date,
         "img": img,
         "id_tag": tag,
-        "id_faculty" : 1 // сделать
+        "id_faculty": id_faculty
     }
     console.log(tag)
     try {
@@ -163,6 +183,9 @@ async function update_adv() {
             body: JSON.stringify(body_json)
         })
         await response.ok;
+        setTimeout(function () {
+            window.location.href = '/profile';
+        }, 1000);
     }
     catch (e) { console.log(e) }
 }

@@ -14,7 +14,7 @@ async function getUser() {
         document.getElementById('first_name').innerHTML = json_data.first_name
         document.getElementById('last_name').innerHTML = json_data.last_name
         document.getElementById('email').innerHTML = json_data.email
-        document.getElementById('faculty_name').innerHTML = json_data.faculty
+        document.getElementById('faculty').innerHTML = json_data.faculty
         document.getElementById('role').innerHTML = json_data.role
         document.getElementById('img').src = json_data.img
 

@@ -50,7 +50,7 @@ async function getAdv() {
         let json_data = await response.json();
         document.getElementById('event-img').src = json_data.img
         document.querySelector('.event-name').innerHTML = json_data.name
-        document.querySelector('.event-tag').innerHTML = "#" + json_data.tag
+        document.querySelector('.event-tag').innerHTML = "#" + json_data.tag + " #" + json_data.faculty
         document.querySelector('.event-description').innerHTML = json_data.description
         document.getElementById('event-data').innerHTML = json_data.time_end
         document.querySelector('.count-people').innerHTML = json_data.current_member + " / " + json_data.count_member

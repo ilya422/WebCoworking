@@ -1,5 +1,6 @@
 window.onload = load_page()
 function load_page() {
+    getFaculty();
     getUser();
 }
 
@@ -13,6 +14,7 @@ async function getUser() {
         document.getElementById('first_name').value = json_data.first_name
         document.getElementById('last_name').value = json_data.last_name
         document.getElementById('email').innerHTML = json_data.email
+        document.getElementById('faculty').value = json_data.id_faculty
         document.getElementById('role').innerHTML = json_data.role
         document.getElementById('img').src = json_data.img
 
@@ -21,11 +23,28 @@ async function getUser() {
     }
 }
 
-async function NormalUpdate(first_name, last_name, img) {
+async function getFaculty() {
+    let response = await fetch('/api/faculty');
+    if (response.ok) {
+        let selector = document.getElementById('faculty');
+        let json_data = await response.json();
+        for (var i in json_data) {
+            var v = json_data[i];
+            if (v.name != 'Все') {
+                selector.innerHTML += `<option value="${v.id}">${v.name}</option>`;
+            }
+        }
+    } else {
+        console.log('error', response.status);
+    }
+}
+
+async function NormalUpdate(first_name, last_name, id_faculty, img) {
     let success_info = document.getElementById("success_info")
     let body_json = {
         "first_name": first_name,
         "last_name": last_name,
+        "id_faculty": id_faculty,
         "img": img
     }
 
@@ -40,7 +59,9 @@ async function NormalUpdate(first_name, last_name, img) {
             body: JSON.stringify(body_json)
         });
         await response.json()
-        return
+        setTimeout(function () {
+            window.location.href = '/profile';
+        }, 1000);
     }
     catch {
         success_info.innerHTML = `Неизвестная ошибка!`
@@ -48,12 +69,13 @@ async function NormalUpdate(first_name, last_name, img) {
     }
 }
 
-async function UpdateWithPassword(first_name, last_name, img, old_pass, new_pass_repeat) {
+async function UpdateWithPassword(first_name, last_name, id_faculty, img, old_pass, new_pass_repeat) {
     let success_info = document.getElementById("success_info")
 
     let body_json = {
         "first_name": first_name,
         "last_name": last_name,
+        "id_faculty": id_faculty,
         "img": img,
         "old_password": old_pass,
         "new_password": new_pass_repeat
@@ -70,6 +92,9 @@ async function UpdateWithPassword(first_name, last_name, img, old_pass, new_pass
             body: JSON.stringify(body_json)
         });
         json_data = await response.json()
+        setTimeout(function () {
+            window.location.href = '/profile';
+        }, 1000);
         if (json_data.message == 'Неверный пароль') {
             success_info.innerHTML = `Неверный пароль!`
             success_info.style.display = 'flex'
@@ -86,23 +111,18 @@ async function UpdateWithPassword(first_name, last_name, img, old_pass, new_pass
 function update_User() {
     let first_name = document.getElementById('first_name').value
     let last_name = document.getElementById('last_name').value
-    // let email = document.getElementById('email').value
+    let faculty_selecter = document.getElementById("faculty")
+    var id_faculty = faculty_selecter.options[faculty_selecter.selectedIndex].value;
     let img = document.getElementById('img').src
 
     let success_info = document.getElementById("success_info")
     success_info.style.display = 'none'
-    if (first_name == '' || last_name == ''|| img == '') {
+    if (first_name == '' || last_name == ''|| id_faculty == '0' || img == '') {
         success_info.innerHTML = `Заполните все поля!`
         success_info.style.display = 'flex'
         return
-    }
+    } 
 
-    // if (email.split("@")[1] != "study.utmn.ru") {
-    //     success_info.innerHTML = "Email должен содержать @study.utmn.ru"
-    //     success_info.style.display='flex'
-    //     return
-    // }
-    
     let old_pass  = document.getElementById('old_pass').value
     let new_pass  = document.getElementById('new_pass').value
     let new_pass_repeat = document.getElementById('new_pass_repeat').value
@@ -110,7 +130,7 @@ function update_User() {
     if (old_pass != '' || new_pass != '' || new_pass_repeat != '') {
         if (old_pass != '' && new_pass != '' && new_pass_repeat != '') {
             if (new_pass == new_pass_repeat) {
-                UpdateWithPassword(first_name, last_name, img, old_pass, new_pass_repeat)
+                UpdateWithPassword(first_name, last_name, id_faculty, img, old_pass, new_pass_repeat)
                 return
             }
             else {
@@ -126,7 +146,7 @@ function update_User() {
         }
     }
     else {
-        NormalUpdate(first_name, last_name, img)
+        NormalUpdate(first_name, last_name, id_faculty, img)
         return
     }
 }

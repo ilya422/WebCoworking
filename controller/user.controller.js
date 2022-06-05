@@ -36,7 +36,7 @@ class UserController {
     async getOneUserByID(req, res) {
         const id = req.user.id
         const sql = await db.query(
-            `SELECT u.id, first_name, last_name, email, f.name as faculty, r.name as role, img
+            `SELECT u.id, first_name, last_name, email, f.id as id_faculty, f.name as faculty, r.name as role, img
             FROM public.users as u
 			JOIN public.faculties as f ON id_faculty = f.id
             JOIN public.roles as r ON id_roles = r.id
@@ -81,19 +81,19 @@ class UserController {
     }
 
     async updateUser(req, res) {
-        const {first_name, last_name, img} = req.body
+        const {first_name, last_name, id_faculty, img} = req.body
         const id = req.user.id
         const sql = await db.query(
             `UPDATE public.users
-            SET first_name=$1, last_name=$2, img=$3
-            WHERE id = $4`, [first_name, last_name, img, id]
+            SET first_name=$1, last_name=$2, id_faculty=$3, img=$4
+            WHERE id = $5`, [first_name, last_name, id_faculty, img, id]
         )
         res.json('ok')
     }
 
     async updateUserWithPassword(req, res) {
         const id = req.user.id
-        const {first_name, last_name, img} = req.body
+        const {first_name, last_name, id_faculty, img} = req.body
         const old_password = req.body.old_password
         const new_password = req.body.new_password
 
@@ -111,8 +111,8 @@ class UserController {
             const hashPassword = bcrypt.hashSync(new_password, 7)
             const sql_update = await db.query(
                 `UPDATE public.users
-                SET first_name=$1, last_name=$2, img=$3, password = $4
-                WHERE id = $5`, [first_name, last_name, img, hashPassword, id]
+                SET first_name=$1, last_name=$2, id_faculty=$3, img=$4, password = $5
+                WHERE id = $6`, [first_name, last_name, id_faculty, img, hashPassword, id]
             )
             return res.json({ message: 'ok'})
         }

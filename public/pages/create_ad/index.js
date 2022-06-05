@@ -31,6 +31,20 @@ async function getTypes() {
     }
 }
 
+async function getFaculty() {
+    let response = await fetch('/api/faculty');
+    if (response.ok) {
+        let selector = document.getElementById('faculty');
+        let json_data = await response.json();
+        for (var i in json_data) {
+            var v = json_data[i];
+            selector.innerHTML += `<option value="${v.id}">${v.name}</option>`;
+        }
+    } else {
+        console.log('error', response.status);
+    }
+}
+
 async function getTags() {
     let response = await fetch('/api/tag');
     if (response.ok) {
@@ -110,6 +124,8 @@ async function create_evAdv() {
     let time_end = document.getElementById('time_end').value
     let img = document.getElementById('form-img').src
     let type = document.getElementById('form-type').value
+    let faculty_selecter = document.getElementById("faculty")
+    var id_faculty = faculty_selecter.options[faculty_selecter.selectedIndex].value;
     let tag_selecter = document.getElementById('tag')
     var tag = tag_selecter.options[tag_selecter.selectedIndex].value;
 
@@ -117,7 +133,7 @@ async function create_evAdv() {
     let success_info = document.getElementById("success_info")
     let img_split = img.split("/")
     if (name == '' || description == '' || count_member == '0' || time_end == '' ||
-        img_split[img_split.length - 1] == 'image_add.png' || type == '0' || tag == '0') {
+        img_split[img_split.length - 1] == 'image_add.png' || type == '0' || id_faculty == '0' || tag == '0') {
         success_info.innerHTML = `Заполните все поля!`
         success_info.style.display = 'flex'
         return
@@ -133,7 +149,7 @@ async function create_evAdv() {
         "img": img,
         "id_type": type,
         "id_tag": tag,
-        "id_faculty" : 1 // сделать
+        "id_faculty": id_faculty
     }
 
     try {
@@ -259,7 +275,11 @@ function viewEventFrom() {
                     <textarea class="form-desc" id="desc"></textarea>
                     <a class="title"><b>Тег:</b></a>
                     <select class="form-name" id="tag">
-                        <option value="0"></option>
+                        <option value="0">Не выбран</option>
+                    </select>
+                    <a class="title"><b>Факультет:</b></a>
+                    <select class="form-name" id="faculty">
+                        <option value="0">Не выбран</option>
                     </select>
                     <a class="title"><b>Количество требуемых помощников:</b></a>
                     <input class="form-name" id="count_mem" min="0" type="number" value="0">
@@ -278,6 +298,7 @@ function viewEventFrom() {
             </div>
     `
     getTags();
+    getFaculty();
 }
 
 function viewServiceFrom() {
@@ -290,7 +311,7 @@ function viewServiceFrom() {
                     <textarea class="form-desc" id="desc" value=""></textarea>
                     <a class="title"><b>Тег:</b></a>
                     <select class="form-name" id="tag">
-                        <option value="0"></option>
+                        <option value="0">Не выбран</option>
                     </select>
                     <a class="title"><b>Стоимость (руб.):</b></a>
                     <input class="form-name" id="price" min="0" type="number" value="0"><br>
