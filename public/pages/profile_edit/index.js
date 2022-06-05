@@ -1,3 +1,4 @@
+let old_faculty;
 window.onload = load_page()
 function load_page() {
     getFaculty();
@@ -15,6 +16,7 @@ async function getUser() {
         document.getElementById('last_name').value = json_data.last_name
         document.getElementById('email').innerHTML = json_data.email
         document.getElementById('faculty').value = json_data.id_faculty
+        old_faculty = json_data.id_faculty
         document.getElementById('role').innerHTML = json_data.role
         document.getElementById('img').src = json_data.img
 
@@ -59,9 +61,14 @@ async function NormalUpdate(first_name, last_name, id_faculty, img) {
             body: JSON.stringify(body_json)
         });
         await response.json()
-        setTimeout(function () {
-            window.location.href = '/profile';
-        }, 1000);
+        if (id_faculty != old_faculty) {
+            success_info.innerHTML += "\nПерезайдите для обновления факультета"
+        }
+        else {
+            setTimeout(function () {
+                window.location.href = '/profile';
+            }, 1000);
+        }
     }
     catch {
         success_info.innerHTML = `Неизвестная ошибка!`
@@ -92,13 +99,18 @@ async function UpdateWithPassword(first_name, last_name, id_faculty, img, old_pa
             body: JSON.stringify(body_json)
         });
         json_data = await response.json()
-        setTimeout(function () {
-            window.location.href = '/profile';
-        }, 1000);
         if (json_data.message == 'Неверный пароль') {
             success_info.innerHTML = `Неверный пароль!`
             success_info.style.display = 'flex'
             return
+        }
+        if (id_faculty != old_faculty) {
+            success_info.innerHTML += "\nПерезайдите для обновления факультета"
+        }
+        else {
+            setTimeout(function () {
+                window.location.href = '/profile';
+            }, 1000);
         }
         return
     }

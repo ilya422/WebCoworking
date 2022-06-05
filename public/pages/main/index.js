@@ -3,21 +3,28 @@ let select_type = '';
 window.onload = load_page()
 function load_page() {
     getAllAdv();
-    getProfileImage();
-    getTags();
     getTypes();
+    getProfile();
+    getTags();
 }
 
-async function getProfileImage() {
+async function getProfile() {
     try {
         let response = await fetch('/api/user/id')
-        if (response.ok) {
+        if (response.ok && !response.redirected) {
             json_data = await response.json();
             img = document.getElementById('profile_img');
             img.src = json_data[0].img;
-
+            document.querySelector(".header-subtitle").innerHTML += " - " + json_data[0].faculty;
         } else {
-            console.log('error', response.status);
+            document.querySelector(".header-subtitle").innerHTML += " - Гостевая"
+            selector_type = document.getElementById('type_choice');
+            for (var i in selector_type.options) {
+                var type = selector_type.options[i];
+                if (type.innerHTML != "Услуга") {
+                    type.remove()
+                }
+            }
         }
     }
     catch { }
@@ -74,6 +81,10 @@ async function getAllAdv() {
         let div = document.querySelector('.cards-holder');
         div.innerHTML = '';
 
+        if (response_ev.redirected) {
+            getServiceAdv()
+            return
+        }
         let json_data_ev = await response_ev.json();
         let json_data_ser = await response_ser.json();
         let json_data = [...json_data_ev, ...json_data_ser];

@@ -114,6 +114,7 @@ class UserController {
                 SET first_name=$1, last_name=$2, id_faculty=$3, img=$4, password = $5
                 WHERE id = $6`, [first_name, last_name, id_faculty, img, hashPassword, id]
             )
+            req.cookies.access_token = "update"
             return res.json({ message: 'ok'})
         }
     }

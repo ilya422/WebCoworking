@@ -13,7 +13,7 @@ router.use('/create_ad', authMiddleware,
 router.use('/service/:id',
     Router.static(path.resolve('public/pages/service_view')))
 
-router.use('/event/:id',
+router.use('/event/:id', authMiddleware,
     Router.static(path.resolve('public/pages/event_view')))
 
 router.use('/service_edit/:id', authMiddleware,

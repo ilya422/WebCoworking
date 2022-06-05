@@ -31,6 +31,7 @@ class evAdvController {
         // const page = req.params.page
         // const page = 1
         // const itemsPerPage = 9
+        const faculty = req.user.faculty
         const sql = await db.query(
             `SELECT ev.id, ev.name, ev.description,
             ev.count_member, ev.current_member, to_char(DATE(time_end), 'DD-MM-YYYY') as time_end, 
@@ -39,12 +40,13 @@ class evAdvController {
             JOIN types as ty ON ev.id_type = ty.id
             JOIN tags as tg ON ev.id_tag = tg.id
             JOIN public.faculties as f ON id_faculty = f.id
-            WHERE current_member < count_member`
+            WHERE current_member < count_member AND (f.name=$1 OR f.name = 'Все' OR $1 = 'Все' )`, [faculty]
             // LIMIT ${itemsPerPage} OFFSET (${page} - 1) * ${itemsPerPage}`
         )
         res.json(sql.rows)
     }
     async get_evAdvByTag(req, res) {
+        const faculty = req.user.faculty
         const id_tag = req.params.id_tag
         const sql = await db.query(
             `SELECT ev.id, ev.name, ev.description,
@@ -54,7 +56,7 @@ class evAdvController {
             JOIN types as ty ON ev.id_type = ty.id
             JOIN tags as tg ON ev.id_tag = tg.id
             JOIN public.faculties as f ON id_faculty = f.id
-            WHERE current_member < count_member AND tg.id = $1`, [id_tag]
+            WHERE current_member < count_member AND tg.id = $1 AND (f.name=$2 OR f.name = 'Все' OR $2 = 'Все')`, [id_tag, faculty]
         )
         res.json(sql.rows)
     }

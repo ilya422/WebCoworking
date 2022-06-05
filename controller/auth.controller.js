@@ -41,7 +41,7 @@ class AuthController {
                 return res.json({ message: 'Неверный пароль' })
             }
             
-            await tokensController.createTokens(user.id, user.role, res)
+            await tokensController.createTokens(user.id, user.role, user.faculty, res)
             return res.json({ message: "Вход выполнен успешно" });
 
         } catch (e) {

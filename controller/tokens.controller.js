@@ -3,10 +3,11 @@ const jwt = require('jsonwebtoken')
 const { secretAccess, secretRefresh, secretRecovery } = require('../config')
 const userController = require('./user.controller')
 
-const generateAccessToken = (id, role) => {
+const generateAccessToken = (id, role, faculty) => {
     const payload = {
         id,
-        role
+        role,
+        faculty
     }
     return jwt.sign(payload, secretAccess, { expiresIn: "1h" })
 }
@@ -29,8 +30,8 @@ const generateRecoveryToken = (id, code) => {
 
 
 class TokensController {
-    async createTokens(id_user, role, res) {
-        let tokenAccess = generateAccessToken(id_user, role)
+    async createTokens(id_user, role, faculty, res) {
+        let tokenAccess = generateAccessToken(id_user, role, faculty)
         let tokenRefresh = generateRefreshToken(id_user)
         let time_end = new Date(Date.now())
         time_end.setDate(time_end.getDate() + 3);
@@ -67,7 +68,7 @@ class TokensController {
         let user = await userController.findOneUserByID(id_user)
         user = user[0]
 
-        let new_tokenAccess = generateAccessToken(user.id, user.role)
+        let new_tokenAccess = generateAccessToken(user.id, user.role, user.faculty)
         let new_tokenRefresh = generateRefreshToken(user.id)
         let new_time_end = new Date(Date.now())
         new_time_end.setDate(new_time_end.getDate() + 3);

@@ -47,7 +47,7 @@ class EmailController {
         const ad_name = req.body.name
         for (var u in users_list) {
             var u = users_list[u];
-            let name = "Новое мероприятие по подписке на тег"
+            let name = "Новое мероприятие по подписке"
             let message = `Объявление: ${ad_name}\nТег: ${u.tag_name}\nСсылка на мероприятие:\n${url}`
             let to = u.email
             setTimeout(function () {

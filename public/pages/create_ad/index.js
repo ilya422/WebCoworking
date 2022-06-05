@@ -166,7 +166,7 @@ async function create_evAdv() {
 
         if (response.ok) {
             json_data = await response.json();
-            sendMainForSubEvTag(name, tag, json_data.id),
+            sendMainForSubEvTag(name, tag, json_data.id, id_faculty),
                 setTimeout(function () {
                     window.location.href = '/';
                 }, 1000)
@@ -179,8 +179,8 @@ async function create_evAdv() {
     }
 }
 
-async function sendMainForSubEvTag(name, id_tag, id_ev) {
-    let response = await fetch(`/api/sub_events_tag/${id_tag}`);
+async function sendMainForSubEvTag(name, id_tag, id_ev, id_faculty) {
+    let response = await fetch(`/api/sub_events_tag/${id_tag}/${id_faculty}`);
     if (response.ok) {
         users = await response.json();
         let url = window.location.href;
