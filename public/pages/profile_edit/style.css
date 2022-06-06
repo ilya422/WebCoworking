@@ -84,6 +84,8 @@ body {
     font-weight: bold;
 }
 
+
+
 .info_text {
     font-family: 'Tinos', serif;
     font-size: 20px;
@@ -108,6 +110,7 @@ type[text]{
 .succec-btn {
     padding-top: 10px;
     font-size: 16px;
+    display: flex;
 }
 
 .img-edit {
@@ -139,16 +142,18 @@ type[text]{
     background-color: rgb(34, 76, 118);
 }
 
+#bttn_edit{
+    margin: 0px 10px;
+}
+
 #success_info {
     width: 70%;
     display: flex;
-    height: 30px;
-    background-color: rgba(237, 201, 71, 0.659);
+    height: auto;
+    background-color: rgba(240, 204, 73, 0.659);
     padding: 10px;
     border-radius: 10px;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
     font-family: 'Open Sans', sans-serif;
     margin-top: 20px;
 }
@@ -259,6 +264,14 @@ type[text]{
 
     #bttn_edit, #bttn_back{
         font-size: 14px;
+    }
+
+    p{
+        margin-block-end: 12px;
+    }
+
+    .input_text {
+        margin-top: 15px;
     }
 
 }

@@ -15,9 +15,9 @@ async function getProfile() {
             json_data = await response.json();
             img = document.getElementById('profile_img');
             img.src = json_data[0].img;
-            document.querySelector(".header-subtitle").innerHTML += " - " + json_data[0].faculty;
+            document.querySelector(".header-subtitle").innerHTML += "<br>" + json_data[0].faculty;
         } else {
-            document.querySelector(".header-subtitle").innerHTML += " - Гостевая"
+            document.querySelector(".header-subtitle").innerHTML += "<br>Гостевая"
             selector_type = document.getElementById('type_choice');
             for (var i in selector_type.options) {
                 var type = selector_type.options[i];

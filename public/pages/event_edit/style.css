@@ -115,7 +115,7 @@ input[type="submit"]{
     display: flex;
 }
 
-#event {
+#event, #faculty {
     border-radius: 5px;
     margin-bottom: 10px;
     margin-top: 5px;
@@ -129,7 +129,7 @@ input[type="submit"]{
     font-size: 18px;
 }
 
-.event-name, .event-tag, .event-people, .event-date {
+.event-name, .event-tag, .event-people, .event-date, .event-faculty {
     height: 25px;
     border: 2px solid rgb(60, 143, 226);
     font-size: 18px;
@@ -291,10 +291,6 @@ input[type="file"]{
         width: 80%;
     }
 
-    .event-text {
-        padding: 0px 20px;
-        font-size: 17px;
-    }
 
     .event-description{
         width: 100%;

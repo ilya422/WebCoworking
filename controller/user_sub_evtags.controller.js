@@ -25,7 +25,7 @@ class UserSubEvTagsController {
         const id_tag = req.params.id_tag
         const id_faculty = req.params.id_faculty
         const sql = await db.query(
-            `SELECT sub.id_user, u.email, u.id_faculty, sub.id_tag, t.name as tag_name, 
+            `SELECT sub.id_user, u.email, u.id_faculty, sub.id_tag, t.name as tag_name 
             FROM public.user_sub_evtags as sub
             JOIN public.tags as t ON t.id = sub.id_tag
 			JOIN public.users as u ON u.id = sub.id_user

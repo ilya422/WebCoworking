@@ -248,10 +248,6 @@ body {
         justify-content: center;
     }
 
-    #bttn_exit, #bttn_exit_all {
-        padding: 11px 13px;
-    }
-
     .profile_btn {
         display: flex;
         align-items: center;

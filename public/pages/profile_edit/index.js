@@ -62,7 +62,7 @@ async function NormalUpdate(first_name, last_name, id_faculty, img) {
         });
         await response.json()
         if (id_faculty != old_faculty) {
-            success_info.innerHTML += "\nПерезайдите для обновления факультета"
+            success_info.innerHTML += "\nОбновите для смены факультета"
         }
         else {
             setTimeout(function () {

@@ -44,14 +44,17 @@ body {
     flex-direction: column;
 }
 
-input[type='text'] 
+input[type='text']
 { 
     font-size: 17px;
     width: 90%; 
 }
 
-#faculty {
-    width: 150px;
+#faculty 
+{ 
+    font-size: 17px;
+    width: 92%; 
+    height: 26px;
 }
 
 .question{
