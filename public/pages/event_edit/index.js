@@ -2,10 +2,10 @@ let getURL = window.location.href.split("/")
 id_adv = getURL[getURL.length - 2]
 window.onload = load_page()
 function load_page() {
-    getTags();
-    getAdv();
     getFaculty();
+    getTags();
     getProfileImage();
+    getAdv();
 }
 
 async function checkUser(user_id, role) {
@@ -42,8 +42,8 @@ async function getProfileImage() {
 async function getTags() {
     let response = await fetch('/api/tag');
     if (response.ok) {
-        selector = document.querySelector('.event-tag');
-        json_data = await response.json();
+        let selector = document.querySelector('.event-tag');
+        let json_data = await response.json();
         for (var i in json_data) {
             var v = json_data[i];
             selector.innerHTML += `<option value="${v.id}">${v.name}</option>`;
@@ -54,15 +54,13 @@ async function getTags() {
 }
 
 async function getFaculty() {
-    let response = await fetch('/api/faculty');
+    let response = await fetch('/api/faculty/adv');
     if (response.ok) {
         let selector = document.getElementById('faculty');
         let json_data = await response.json();
         for (var i in json_data) {
             var v = json_data[i];
-            if (v.name != 'Все') {
-                selector.innerHTML += `<option value="${v.id}">${v.name}</option>`;
-            }
+            selector.innerHTML += `<option value="${v.id}">${v.name}</option>`;
         }
     } else {
         console.log('error', response.status);

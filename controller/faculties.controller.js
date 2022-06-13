@@ -17,6 +17,15 @@ class FacultController {
         )
         res.json(sql.rows)
     }
+    async getFacultForAdv(req, res) {
+        const user_faculty = req.user.faculty
+        const sql = await db.query(
+            `SELECT id, name
+            FROM public.faculties
+            WHERE name = $1 OR name = 'Все'`, [user_faculty]
+        )
+        res.json(sql.rows)
+    }
     async getOneFacult(req, res) {
         const id = req.params.id
         const sql = await db.query(

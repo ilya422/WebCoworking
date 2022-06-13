@@ -12,4 +12,5 @@ router.get('/api/event_adv/:id', authMiddleware, faciltyMiddleware, evAdvControl
 router.get('/api/event_adv/user/p', authMiddleware, evAdvController.get_evAdvByUser)
 router.put('/api/event_adv/:id', authMiddleware, extendedRoleMiddlewate, evAdvController.update_evAdv)
 router.delete('/api/event_adv', authMiddleware, extendedRoleMiddlewate, evAdvController.delete_evAdv)
+router.delete('/api/event_adv/user', authMiddleware, evAdvController.deleteAll_evAdv)
 module.exports = router

@@ -72,5 +72,30 @@ class UserSubEventsController {
         )
         res.json('ok')
     }
+    async deleteAllSubByUserEvent(req, res) {
+        const id_user = req.user.id
+        const sql_subs = await db.query(
+            `SELECT ev.id, ev.name, f.name as faculty FROM public.user_sub_event_advs as sub
+            JOIN public.event_advs as ev ON ev.id = sub.id_event_adv
+            JOIN public.faculties as f ON ev.id_faculty = f.id
+            WHERE sub.id_user = $1 AND f.name != 'Все'`, [id_user]
+        )
+        let user_sub = sql_subs.rows
+
+        for (var i in user_sub) {
+            var v = user_sub[i];
+            const id_event_adv = v.id
+            const sql = await db.query(
+                `DELETE FROM public.user_sub_event_advs
+                WHERE id_user = $1 AND id_event_adv = $2`, [id_user, id_event_adv]
+            )
+            const sql_update = await db.query(
+                `UPDATE public.event_advs
+                SET current_member= current_member -1
+                WHERE id = $1`, [id_event_adv]
+            )
+        }
+        res.json('ok')
+    }
 }
 module.exports = new UserSubEventsController()

@@ -63,6 +63,22 @@ async function NormalUpdate(first_name, last_name, id_faculty, img) {
         await response.json()
         if (id_faculty != old_faculty) {
             success_info.innerHTML += "</br>Перезайдите в профиль для обновления факультета"
+            
+            let response_ev = await fetch('/api/event_adv/user', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+            await response_ev.json();
+
+            let response_sub = await fetch('/api/sub_events/user', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+            await response_sub.json();
         }
         else {
             setTimeout(function () {
@@ -106,6 +122,22 @@ async function UpdateWithPassword(first_name, last_name, id_faculty, img, old_pa
         }
         if (id_faculty != old_faculty) {
             success_info.innerHTML += "</br>Перезайдите в профиль для обновления факультета"
+            
+            let response_ev = await fetch('/api/event_adv/user', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+            await response_ev.json();
+
+            let response_sub = await fetch('/api/sub_events/user', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                }
+            })
+            await response_sub.json();
         }
         else {
             setTimeout(function () {

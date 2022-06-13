@@ -91,7 +91,7 @@ class evAdvController {
     async getFacultyAdv(req) {
         const id = req.params.id
         const sql = await db.query(
-            `SELECT f.id as id_faculty, f.name as faculty
+            `SELECT f.id as id_faculty, f.name as faculty, ev.id_user_add
             FROM public.event_advs as ev
             JOIN public.faculties as f ON id_faculty = f.id
             WHERE ev.id = $1`, [id]
@@ -112,6 +112,15 @@ class evAdvController {
         const sql = await db.query(
             `DELETE FROM public.event_advs
             WHERE id = $1`, [id]
+        )
+        res.json('ok')
+    }
+
+    async deleteAll_evAdv(req, res) {
+        const id = req.user.id
+        const sql = await db.query(
+            `DELETE FROM public.event_advs
+            WHERE id_user_add = $1`, [id]
         )
         res.json('ok')
     }

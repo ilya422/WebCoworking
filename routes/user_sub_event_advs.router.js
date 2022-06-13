@@ -9,5 +9,6 @@ router.get('/api/sub_events/user/sub', authMiddleware, UserSubEventsController.g
 router.get('/api/sub_events/user_adv/:id_event_adv', authMiddleware, UserSubEventsController.getSubByUserEvent)
 // router.get('/api/sub_events/adv/:id', authMiddleware, UserSubEventsController.getSubByEvent)
 router.delete('/api/sub_events', authMiddleware, UserSubEventsController.deleteSubByUserEvent)
+router.delete('/api/sub_events/user', authMiddleware, UserSubEventsController.deleteAllSubByUserEvent)
 
 module.exports = router

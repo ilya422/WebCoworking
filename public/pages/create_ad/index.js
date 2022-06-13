@@ -32,7 +32,7 @@ async function getTypes() {
 }
 
 async function getFaculty() {
-    let response = await fetch('/api/faculty');
+    let response = await fetch('/api/faculty/adv');
     if (response.ok) {
         let selector = document.getElementById('faculty');
         let json_data = await response.json();
