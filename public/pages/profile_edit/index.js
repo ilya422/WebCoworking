@@ -62,7 +62,7 @@ async function NormalUpdate(first_name, last_name, id_faculty, img) {
         });
         await response.json()
         if (id_faculty != old_faculty) {
-            success_info.innerHTML += "\nОбновите для смены факультета"
+            success_info.innerHTML += "</br>Перезайдите в профиль для обновления факультета"
         }
         else {
             setTimeout(function () {
@@ -105,7 +105,7 @@ async function UpdateWithPassword(first_name, last_name, id_faculty, img, old_pa
             return
         }
         if (id_faculty != old_faculty) {
-            success_info.innerHTML += "\nПерезайдите для обновления факультета"
+            success_info.innerHTML += "</br>Перезайдите в профиль для обновления факультета"
         }
         else {
             setTimeout(function () {

@@ -79,7 +79,7 @@ class evAdvController {
         const sql = await db.query(
             `SELECT ev.id, ev.name, ev.description,
             ev.count_member, ev.current_member, to_char(DATE(time_end), 'DD-MM-YYYY') as time_end, 
-            ev.img, ty.name as type, tg.id as id_tag, tg.name as tag, f.id as id_faculty, f.name as faculty, f.name as faculty, ev.id_user_add, ev.time_add
+            ev.img, ty.name as type, tg.id as id_tag, tg.name as tag, f.id as id_faculty, f.name as faculty, ev.id_user_add, ev.time_add
             FROM public.event_advs as ev
             JOIN types as ty ON ev.id_type = ty.id
             JOIN tags as tg ON ev.id_tag = tg.id
@@ -87,6 +87,16 @@ class evAdvController {
             WHERE ev.id = $1`, [id]
         )
         res.json(sql.rows[0])
+    }
+    async getFacultyAdv(req) {
+        const id = req.params.id
+        const sql = await db.query(
+            `SELECT f.id as id_faculty, f.name as faculty
+            FROM public.event_advs as ev
+            JOIN public.faculties as f ON id_faculty = f.id
+            WHERE ev.id = $1`, [id]
+        )
+        return sql.rows[0]
     }
     async update_evAdv(req, res) {
         const { id, name, description, count_member, time_end, img, id_tag, id_faculty } = req.body

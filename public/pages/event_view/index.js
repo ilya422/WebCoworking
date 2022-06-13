@@ -48,6 +48,9 @@ async function getAdv() {
 
     if (response.ok) {
         let json_data = await response.json();
+        if (json_data.message == "Не ваш факультет") {
+            window.location.href = '/';
+        }
         document.getElementById('event-img').src = json_data.img
         document.querySelector('.event-name').innerHTML = json_data.name
         document.querySelector('.event-tag').innerHTML = "#" + json_data.tag + " #" + json_data.faculty
