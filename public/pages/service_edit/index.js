@@ -60,7 +60,9 @@ async function getAdv() {
         document.querySelector('.service-img').src = json_data.img
         document.querySelector('.service-name').value = json_data.name
         document.querySelector('.service-tag').value = json_data.id_tag
-        new_description = json_data.description.replace('</p><p>', String.fromCharCode(13, 10))
+        new_description = json_data.description.replaceAll('</p><p>', String.fromCharCode(13, 10))
+        console.log(json_data.description)
+        console.log(new_description)
         document.querySelector('.service-description').value = new_description
         document.querySelector('.service-price').value = json_data.price
 

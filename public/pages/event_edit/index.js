@@ -74,7 +74,7 @@ async function getAdv() {
         json_data = await response.json();
         document.querySelector('.event-img').src = json_data.img
         document.querySelector('.event-name').value = json_data.name
-        new_description = json_data.description.replace('</p><p>', String.fromCharCode(13, 10))
+        new_description = json_data.description.replaceAll('</p><p>', String.fromCharCode(13, 10))
         document.querySelector('.event-description').value = new_description
         document.querySelector('.event-tag').value = json_data.id_tag
         document.querySelector('.event-faculty').value = json_data.id_faculty

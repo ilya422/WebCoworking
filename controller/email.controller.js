@@ -24,6 +24,7 @@ function Send(res, name, message, to) {
 
     smtpTransport.sendMail(mailOptions, function (error, res) {
         if (error) {
+            console.log(error)
             return
         } else {
             return res.json('ok');
